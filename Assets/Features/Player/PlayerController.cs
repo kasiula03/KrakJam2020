@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     public string moveLeftKeyCode   =   "a";
     public string moveRightKeyCode  =   "d";
     public string jumpKeyCode       =   "w";
+    public string fireKeyCode = "space";
 
     //private variables
     public delegate void PlayerEvent();
@@ -36,7 +37,9 @@ public class PlayerController : MonoBehaviour
     }
     public struct EventConfig
     {
+        public bool resolve;
         public PlayerEvent eventFunction;
+        public Abilities.Bindable resolver;
         public TypeEvent eventType;
         public string keyCode;
         public EventConfig(PlayerEvent _eventFunction, TypeEvent _eventType, string _keyCode)
@@ -44,6 +47,17 @@ public class PlayerController : MonoBehaviour
             eventFunction = _eventFunction;
             eventType = _eventType;
             keyCode = _keyCode;
+            resolve = false;
+            resolver = Abilities.Bindable.VomitAnimation;
+        }
+
+        public EventConfig(Abilities.Bindable bind, TypeEvent eventType, string keyCode)
+        {
+            resolver = bind;
+            this.eventType = eventType;
+            this.keyCode = keyCode;
+            eventFunction = null;
+            resolve = true;
         }
     }
 
@@ -71,7 +85,8 @@ public class PlayerController : MonoBehaviour
     {
         _playerEvents.Add(new EventConfig(MoveLeft, TypeEvent.Key, moveLeftKeyCode));
         _playerEvents.Add(new EventConfig(MoveRight, TypeEvent.Key, moveRightKeyCode));
-        _playerEvents.Add(new EventConfig(Jump, TypeEvent.Down, jumpKeyCode));
+        _playerEvents.Add(new EventConfig(Abilities.Bindable.Jump, TypeEvent.Down, jumpKeyCode));
+        _playerEvents.Add(new EventConfig(Abilities.Bindable.Fire, TypeEvent.Down, fireKeyCode));
     }
 
     //Private functions
@@ -84,26 +99,37 @@ public class PlayerController : MonoBehaviour
                 case TypeEvent.Down:
                     if (Input.GetKeyDown(playerEvent.keyCode))
                     {
-                        playerEvent.eventFunction.Invoke();
+                        playerEvent.eventFunction?.Invoke();
+                        if(playerEvent.resolve)
+                            Abilities.BindedActions[playerEvent.resolver].Invoke(this);
                     }
                     break;
                 case TypeEvent.Key:
                     if (Input.GetKey(playerEvent.keyCode))
                     {
-                        playerEvent.eventFunction.Invoke();
+                        playerEvent.eventFunction?.Invoke();
+                        if(playerEvent.resolve)
+                            Abilities.BindedActions[playerEvent.resolver].Invoke(this);
                     }
                     break;
                 case TypeEvent.Up:
                     if (Input.GetKeyUp(playerEvent.keyCode))
                     {
-                        playerEvent.eventFunction.Invoke();
+                        playerEvent.eventFunction?.Invoke();
+                        if(playerEvent.resolve)
+                            Abilities.BindedActions[playerEvent.resolver].Invoke(this);
                     }
                     break;
             }
         }
     }
 
-    private void Jump()
+    public void Fire()
+    {
+        Debug.Log("FIRE!!");
+    }
+
+    public void Jump()
     {
         if ( _isGrounded)
         {

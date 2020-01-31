@@ -1,7 +1,32 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
-public static class Abilities
+public class Abilities
 {
+    public enum Bindable
+    {
+        Jump,
+        Fire,
+        VomitAnimation,
+    }
+
+    public static Dictionary<Bindable, Action<PlayerController>> BindedActions =
+        new Dictionary<Bindable, Action<PlayerController>>()
+        {    
+            { Bindable.Jump, ExecuteJump },
+            { Bindable.Fire, ExecuteFire }
+        };
+
+    public static void ExecuteFire(PlayerController player)
+    {
+        player.Fire();
+    }
+    
+    public static void ExecuteJump(PlayerController player)
+    {
+        player.Jump();
+    }
+    
     public static string[] OnEvents = 
     {
         "OnPressJumpButton",
