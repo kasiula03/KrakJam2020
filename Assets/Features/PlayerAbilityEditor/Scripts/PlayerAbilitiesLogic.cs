@@ -5,9 +5,11 @@ using Zenject;
 
 public class PlayerAbilitiesLogic : IInitializable, IDisposable
 {
-    private readonly Dictionary<string, StringReactiveProperty> OnEventPerformActionDictionary
+    readonly Dictionary<string, StringReactiveProperty> OnEventPerformActionDictionary
         = new Dictionary<string, StringReactiveProperty>();
 
+    readonly ReactiveCollection<string> UnlockedAbilities = new ReactiveCollection<string>();
+    
     public void Initialize()
     {
         SetupBaseAbilities();
@@ -16,6 +18,14 @@ public class PlayerAbilitiesLogic : IInitializable, IDisposable
     public void Dispose()
     {
         
+    }
+
+    public void UnlockAbility(string ability)
+    {
+        if (UnlockedAbilities.Contains(ability))
+            return;
+
+        UnlockedAbilities.Add(ability);
     }
 
     public StringReactiveProperty GetProperty(string key)
@@ -31,8 +41,6 @@ public class PlayerAbilitiesLogic : IInitializable, IDisposable
             AddEmpty(key);
         }
         
-        
-
         void AddEmpty(string key)
         {
             OnEventPerformActionDictionary.Add(key, new StringReactiveProperty(string.Empty));
