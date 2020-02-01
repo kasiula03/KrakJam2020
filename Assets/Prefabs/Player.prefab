@@ -155,7 +155,7 @@ MonoBehaviour:
   _anim: {fileID: 7553986650784321449}
   playerMoveSpeed: 900
   playerMoveMaxSpeed: {x: 8.5, y: 30}
-  jumpForce: 10
+  jumpForce: 3
   jetpackForce: 15
   maxTimeFly: 2
   PlayerHealth: {fileID: 7553986652331696007}
