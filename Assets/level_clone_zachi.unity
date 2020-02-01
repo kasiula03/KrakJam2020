@@ -2395,6 +2395,31 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &559099938 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9158181575384942396, guid: ecdece1cbc48642ad9a907a54bc903b2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1507508536214335749}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &559099939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559099938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea53cd0051b9e4384b061714f5863446, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rednerer: {fileID: 559099940}
+--- !u!212 &559099940 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 5220554274315009382, guid: ecdece1cbc48642ad9a907a54bc903b2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1507508536214335749}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &570460779
 GameObject:
   m_ObjectHideFlags: 0
@@ -4928,6 +4953,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _target: {fileID: 1396315195}
   mulInterpolation: {x: 2.5, y: 8}
+  _offset: {x: 0, y: 0}
 --- !u!1 &1262322397
 GameObject:
   m_ObjectHideFlags: 0
@@ -7232,6 +7258,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: JUMP_ShowPlayerEditWhenInTrigger
       objectReference: {fileID: 0}
+    - target: {fileID: 5220554274315009382, guid: ecdece1cbc48642ad9a907a54bc903b2,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5220554274315009382, guid: ecdece1cbc48642ad9a907a54bc903b2,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.31680512
+      objectReference: {fileID: 0}
+    - target: {fileID: 5220554274315009382, guid: ecdece1cbc48642ad9a907a54bc903b2,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.2028302
+      objectReference: {fileID: 0}
+    - target: {fileID: 8309102685525347815, guid: ecdece1cbc48642ad9a907a54bc903b2,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.258
+      objectReference: {fileID: 0}
+    - target: {fileID: 8309102685525347815, guid: ecdece1cbc48642ad9a907a54bc903b2,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.83007115
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ecdece1cbc48642ad9a907a54bc903b2, type: 3}
 --- !u!1001 &3184969507404798595
@@ -7325,11 +7376,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3900121982277435754, guid: 625b6333e13e34dcd9bb58eff0a9eedc,
-        type: 3}
-      propertyPath: ability
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3900121982277435755, guid: 625b6333e13e34dcd9bb58eff0a9eedc,
         type: 3}
       propertyPath: m_LocalPosition.x

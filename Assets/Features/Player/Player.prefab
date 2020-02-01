@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 918390238}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.33, y: 1.33, z: 1}
+  m_LocalScale: {x: 2.33, y: 2.33, z: 1}
   m_Children: []
   m_Father: {fileID: 6119828431039171680}
   m_RootOrder: 2
@@ -161,7 +161,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1825707556}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3.14, z: 0}
+  m_LocalPosition: {x: -0.02, y: -4.91, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6119828431039171680}
@@ -198,7 +198,7 @@ Transform:
   m_GameObject: {fileID: 6119828431039171692}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 18.08, y: -1.62, z: 0}
-  m_LocalScale: {x: 0.319, y: 0.319, z: 0.319}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children:
   - {fileID: 1825707557}
   - {fileID: 1147445609}
@@ -244,7 +244,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 99
+  m_SortingOrder: 32767
   m_Sprite: {fileID: 21300000, guid: 83bd07329f45549059904a1fc1bf55a3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -269,7 +269,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.020950556, y: -0.0000019073486}
+  m_Offset: {x: 0.1377697, y: -0.15186858}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -280,7 +280,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.877273, y: 5.226771}
+  m_Size: {x: 4.232365, y: 8.754679}
   m_EdgeRadius: 0
 --- !u!50 &6119828431039171687
 Rigidbody2D:
@@ -321,11 +321,11 @@ MonoBehaviour:
     m_Bits: 23
   _spriteRenderer: {fileID: 918390240}
   _anim: {fileID: 918390241}
+  _cameraFollowTransform: {fileID: 1147445609}
   playerMoveSpeed: 900
   playerMoveMaxSpeed: {x: 8.5, y: 30}
   jumpForce: 6.5
-  jetpackForce: 15
-  maxTimeFly: 2
+  reloadGunTime: 0.5
   PlayerHealth: {fileID: 1391629775}
   JetpackFuel: {fileID: 8227650870193688156}
   BulletPrefab: {fileID: 3538726684605360980, guid: de84993bde01e7f49a2706a95739e343,
@@ -335,7 +335,7 @@ MonoBehaviour:
   moveLeftKeyCode: a
   moveRightKeyCode: d
   jumpKeyCode: w
-  fireKeyCode: e
+  fireKeyCode: space
   jetpackKeyCode: v
   specialActionKeyCode: z
 --- !u!114 &1391629775
@@ -375,4 +375,4 @@ MonoBehaviour:
   fuel: 100
   fuelFireSpeed: 50
   fuelGenerationSpeed: 30
-  fuelStatus: {fileID: 0}
+  fuelStatusUI: {fileID: 0}
