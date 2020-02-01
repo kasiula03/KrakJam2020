@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class CodeCanvas : MonoBehaviour
 {
-    private const float Time = 1f;
+    private const float Time = .2f;
 
     [ContextMenuItem(nameof(Show), nameof(Show))]
     [ContextMenuItem(nameof(Hide), nameof(Hide))]
