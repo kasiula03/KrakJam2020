@@ -87,12 +87,12 @@ public class EnemyMovement : MonoBehaviour
             distance = Vector2.Distance(new Vector2(transform.position.x, 0), new Vector2(_playerTarget.position.x, 0));
         }
 
-        if(_playerTarget != null && distance < 0.2f)
+        if(_playerTarget != null && _actionOnPlayer != null && distance < 1f)
         {
             //todo: action of player
-           // _actionOnPlayer.DoAction(_playerTarget.position);
+            _actionOnPlayer.DoAction(_playerTarget.position);
         }
-        else if(distance < 0.2f)
+        else if(distance < 1f)
         {
             Debug.Log("Finish");
             _target = Vector3.zero;
