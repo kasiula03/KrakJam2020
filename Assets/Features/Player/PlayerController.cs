@@ -247,7 +247,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Time.time > lastFireTime + reloadGunTime)
         {
-            GameObject newBox = Instantiate(BulletPrefab);
+            Bullet newBox = Instantiate(BulletPrefab);
             newBox.transform.position = new Vector2(transform.position.x + 1.5f * _direction, transform.position.y);
             newBox.Setup("Player", "Enemy", _direction, transform.position + Vector3.right * _direction);
             if (_direction == -1)
