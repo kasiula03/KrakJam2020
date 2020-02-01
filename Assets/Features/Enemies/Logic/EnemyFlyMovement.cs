@@ -8,7 +8,7 @@ public class EnemyFlyMovement : MonoBehaviour
 {
     [SerializeField] private Vector3 _flyHeight;
     [SerializeField] private float _targetRange;
-    [SerializeField] private Bullet _bulletPrefab;
+    [SerializeField] private LaserBullet _bulletPrefab;
     [SerializeField] private float _shootCooldown;
     [SerializeField] private MovementAnimation _movementAnimation;
     //[SerializeField] private LayerMask _layerMask;
@@ -46,13 +46,13 @@ public class EnemyFlyMovement : MonoBehaviour
     private void Shot()
     {
         _nextFire = Time.time + _shootCooldown;
-        Bullet bullet = Instantiate(_bulletPrefab, transform.position, Quaternion.identity);
+        LaserBullet bullet = Instantiate(_bulletPrefab, transform.position, Quaternion.identity);
      
         Rigidbody2D rg = bullet.GetComponent<Rigidbody2D>();
         Vector3 direction = bullet.transform.position - _playerTarget.position;
         float dir = direction.normalized.x < 0 ? 1 : -1;
         Debug.Log(dir);
-        bullet.Setup("Enemy", "Player", dir);
+        bullet.Setup("Enemy", "Player", dir, _playerTarget.position);
         // rg.AddForce(direction.normalized * Vector2.one);
        // rg.velocity = dir * 3 * Vector2.one;
     }
