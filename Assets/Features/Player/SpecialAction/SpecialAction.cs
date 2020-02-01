@@ -6,7 +6,6 @@ public abstract class SpecialAction : MonoBehaviour
 {
     [SerializeField] private ShowDialogAction _showDialogAction;
 
-
     public abstract void Perform();
 
     private void OnTriggerEnter2D(Collider2D collision)
