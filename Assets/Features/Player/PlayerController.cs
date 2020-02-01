@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     public float jumpForce          = 5f;
     public float jetpackForce       = 15f;
     public float maxTimeFly = 2f;
+    public float reloadGunTime = 0.5f;
 
     public PlayerHealth PlayerHealth;
     public JetpackFuel JetpackFuel;
@@ -48,6 +49,7 @@ public class PlayerController : MonoBehaviour
     
     private int _direction = 1;
     private SpecialAction _availableSpecialAction;
+    private float lastFireTime = -10;
 
     public Vector2 VerticalDirection
     {
@@ -234,10 +236,14 @@ public class PlayerController : MonoBehaviour
 
     public void Fire()
     {
-        GameObject newBox = Instantiate(BulletPrefab);
-        newBox.transform.position = new Vector2(transform.position.x+1.5f * _direction, transform.position.y);
-        if(_direction == -1)
-            newBox.transform.Rotate(0, 0,180);
+        if(Time.time > lastFireTime+ reloadGunTime)
+        {
+            GameObject newBox = Instantiate(BulletPrefab);
+            newBox.transform.position = new Vector2(transform.position.x+1.5f * _direction, transform.position.y);
+            if(_direction == -1)
+                newBox.transform.Rotate(0, 0,180);
+            lastFireTime = Time.time;
+        }
     }
 
     public void Jump()
