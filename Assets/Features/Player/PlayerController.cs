@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 using Zenject;
 
@@ -18,6 +19,7 @@ public class PlayerController : MonoBehaviour
     public float maxTimeFly = 2f;
 
     public PlayerHealth PlayerHealth;
+    public JetpackFuel JetpackFuel;
 
     //Prefabs to spawn
     public GameObject BulletPrefab;
@@ -168,6 +170,7 @@ public class PlayerController : MonoBehaviour
             fireKeyCode));
         _playerEvents.Add(new EventConfig(Fly, TypeEvent.Key, jetpackKeyCode));
         _playerEvents.Add(new EventConfig(StartFly, TypeEvent.Down, jetpackKeyCode));
+        _playerEvents.Add(new EventConfig(StopFly, TypeEvent.Up, jetpackKeyCode));
         _playerEvents.Add(new EventConfig(PerformSpecialAction, TypeEvent.Key, specialActionKeyCode));
 
     }
@@ -250,15 +253,20 @@ public class PlayerController : MonoBehaviour
 
     private void StartFly()
     {
-        if (_isGrounded)
-        {
-            _endTimeFly = Time.time + maxTimeFly;
-            _jetpackParticle = Instantiate(JetPackParticlePrefab);
-            _jetpackParticle.transform.parent = gameObject.transform;
-            _jetpackParticle.transform.position = new Vector2(transform.position.x, transform.position.y - 0.5f);
-        }
+        JetpackFuel.LaunchJetpack();
+        _jetpackParticle = Instantiate(JetPackParticlePrefab);
+        _jetpackParticle.transform.parent = gameObject.transform;
+        _jetpackParticle.transform.position = new Vector2(transform.position.x, transform.position.y - 0.5f);
     }
 
+    private void StopFly()
+    {
+        JetpackFuel.TurnOffJetpack();
+        if (_jetpackParticle != null)
+        {
+            Destroy(_jetpackParticle);
+        }
+    }
     public void SetupSpecialAction(SpecialAction action)
     {
         _availableSpecialAction = action;
@@ -279,16 +287,12 @@ public class PlayerController : MonoBehaviour
 
     private void Fly()
     {
-        if (Time.time < _endTimeFly)
+        if (JetpackFuel.IsFuel())
         {
             if (_rb.velocity.magnitude > playerMoveMaxSpeed.magnitude)
                 _rb.velocity = _rb.velocity.normalized * playerMoveMaxSpeed;
             else
-                _rb.AddForce(Vector2.up * Time.deltaTime * jetpackForce, ForceMode2D.Impulse);
-        }
-        else if (_jetpackParticle != null)
-        {
-            Destroy(_jetpackParticle);
+                _rb.AddForce(Vector2.up * Time.deltaTime * JetpackFuel.jetpackForce, ForceMode2D.Impulse);
         }
     }
 
