@@ -10,11 +10,14 @@ public class CodeCanvas : MonoBehaviour
     public string Cheats = "";
 
     public bool IsShown { get; private set; } = false;
+    public float _initialScale;
 
     void Awake()
     {
+        _initialScale = this.transform.localScale.x;
+        
         transform.localScale = Vector3.zero;
-        Show();
+        
     }
     
     public Tween Show()
@@ -23,7 +26,7 @@ public class CodeCanvas : MonoBehaviour
             return DOTween.Sequence().Play();
 
         IsShown = true;
-        return DOTween.Sequence().Append(transform.DOScale(Vector3.one, Time).SetEase(Ease.InCirc)).Play();
+        return DOTween.Sequence().Append(transform.DOScale(Vector3.one * _initialScale, Time).SetEase(Ease.InCirc)).Play();
     }
 
     public Tween Hide()
