@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 4339457241386731055}
   - component: {fileID: 4926908229374385820}
   - component: {fileID: 7553986652331696007}
+  - component: {fileID: 1995051078}
+  - component: {fileID: 4804087627825676201}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -153,13 +155,15 @@ MonoBehaviour:
     m_Bits: 23
   _spriteRenderer: {fileID: 7553986650784321448}
   _anim: {fileID: 7553986650784321449}
+  _cameraFollowTransform: {fileID: 7553986652642994977}
   playerMoveSpeed: 900
   playerMoveMaxSpeed: {x: 8.5, y: 30}
   jumpForce: 3
-  jetpackForce: 15
-  maxTimeFly: 2
+  reloadGunTime: 0.5
   PlayerHealth: {fileID: 7553986652331696007}
-  BulletPrefab: {fileID: 3538726684605360980, guid: de84993bde01e7f49a2706a95739e343,
+  JetpackFuel: {fileID: 1995051078}
+  DeathWindow: {fileID: 4804087627825676201}
+  BulletPrefab: {fileID: 2168595441457339279, guid: de84993bde01e7f49a2706a95739e343,
     type: 3}
   JetPackParticlePrefab: {fileID: 7019095592853729841, guid: 7736b978e70083f409c2c00ed20065a1,
     type: 3}
@@ -169,6 +173,7 @@ MonoBehaviour:
   fireKeyCode: space
   jetpackKeyCode: v
   specialActionKeyCode: z
+  currentKeyPressed: 
 --- !u!114 &7553986652331696007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,6 +194,36 @@ MonoBehaviour:
     type: 3}
   EmptyHealthIcon: {fileID: 7875337772317841176, guid: 9cd8cd94c9380aa489edd6e50922dad3,
     type: 3}
+--- !u!114 &1995051078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4339457241386731044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3e3a6be50ba4424c962d734b8d3a1c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jetpackForce: 15
+  maxFuel: 100
+  fuel: 100
+  fuelFireSpeed: 50
+  fuelGenerationSpeed: 30
+  fuelStatusUI: {fileID: 0}
+--- !u!114 &4804087627825676201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4339457241386731044}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4593ccffbb6706847a90f0160c5ca142, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7553986650784321430
 GameObject:
   m_ObjectHideFlags: 0
