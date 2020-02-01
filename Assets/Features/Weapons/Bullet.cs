@@ -39,7 +39,7 @@ public class Bullet : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if(col.collider.gameObject == gameObject)
+        if (col.collider.gameObject.tag != "Player" && col.collider.gameObject.layer != 10)//layer - bullet
         {
             return;
         }
