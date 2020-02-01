@@ -6,7 +6,7 @@ public class CameraFollower : MonoBehaviour
 {
     [SerializeField] private Transform _target;
 
-    private void Update()
+    private void LateUpdate()
     {
         float interpolation = 2f * Time.deltaTime;
 

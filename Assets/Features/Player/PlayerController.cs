@@ -82,7 +82,7 @@ public class PlayerController : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
 		_sr = GetComponent<SpriteRenderer>();
     }
-    void Update()
+    void FixedUpdate()
     {
         this._isGrounded = CalculateIsGrounded();
         
@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour
             ApplyBraking();
         }
     }
- 
+
     void OnCollisionEnter2D(Collision2D col)
     {
         if(_jetpackParticle != null)
