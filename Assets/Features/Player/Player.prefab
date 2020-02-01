@@ -181,6 +181,7 @@ GameObject:
   - component: {fileID: 6119828431039171687}
   - component: {fileID: -6013780804537658156}
   - component: {fileID: 1391629775}
+  - component: {fileID: 8227650870193688156}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -196,7 +197,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6119828431039171692}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.52, y: 0.73, z: 0}
+  m_LocalPosition: {x: 18.08, y: -1.62, z: 0}
   m_LocalScale: {x: 0.319, y: 0.319, z: 0.319}
   m_Children:
   - {fileID: 1825707557}
@@ -279,7 +280,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.877273, y: 5.2267714}
+  m_Size: {x: 2.877273, y: 5.226771}
   m_EdgeRadius: 0
 --- !u!50 &6119828431039171687
 Rigidbody2D:
@@ -322,10 +323,11 @@ MonoBehaviour:
   _anim: {fileID: 918390241}
   playerMoveSpeed: 900
   playerMoveMaxSpeed: {x: 8.5, y: 30}
-  jumpForce: 10
+  jumpForce: 6.5
   jetpackForce: 15
   maxTimeFly: 2
   PlayerHealth: {fileID: 1391629775}
+  JetpackFuel: {fileID: 8227650870193688156}
   BulletPrefab: {fileID: 3538726684605360980, guid: de84993bde01e7f49a2706a95739e343,
     type: 3}
   JetPackParticlePrefab: {fileID: 7019095592853729841, guid: 7736b978e70083f409c2c00ed20065a1,
@@ -333,7 +335,7 @@ MonoBehaviour:
   moveLeftKeyCode: a
   moveRightKeyCode: d
   jumpKeyCode: w
-  fireKeyCode: space
+  fireKeyCode: e
   jetpackKeyCode: v
   specialActionKeyCode: z
 --- !u!114 &1391629775
@@ -356,3 +358,21 @@ MonoBehaviour:
     type: 3}
   EmptyHealthIcon: {fileID: 7875337772317841176, guid: 9cd8cd94c9380aa489edd6e50922dad3,
     type: 3}
+--- !u!114 &8227650870193688156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6119828431039171692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3e3a6be50ba4424c962d734b8d3a1c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jetpackForce: 15
+  maxFuel: 100
+  fuel: 100
+  fuelFireSpeed: 50
+  fuelGenerationSpeed: 30
+  fuelStatus: {fileID: 0}
