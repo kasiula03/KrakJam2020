@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     public string jumpKeyCode       =   "w";
     public string fireKeyCode = "space";
     public string jetpackKeyCode    =   "v";
+    public string specialActionKeyCode = "z";
 
     //private variables
     public delegate void PlayerEvent();
@@ -40,6 +41,7 @@ public class PlayerController : MonoBehaviour
     private GameObject _jetpackParticle = null;
     
     private int _direction = 1;
+    private SpecialAction _availableSpecialAction;
 
     public Vector2 VerticalDirection
     {
@@ -146,6 +148,10 @@ public class PlayerController : MonoBehaviour
             SubHealth(1);
             Destroy(col.gameObject);
         }
+        else if (col.gameObject.tag == "car")
+        {
+            SubHealth(1);
+        }
     }
 
 
@@ -161,7 +167,9 @@ public class PlayerController : MonoBehaviour
             TypeEvent.Down,
             fireKeyCode));
         _playerEvents.Add(new EventConfig(Fly, TypeEvent.Key, jetpackKeyCode));
-        _playerEvents.Add(new EventConfig(StartFly, TypeEvent.Key, jetpackKeyCode));
+        _playerEvents.Add(new EventConfig(StartFly, TypeEvent.Down, jetpackKeyCode));
+        _playerEvents.Add(new EventConfig(PerformSpecialAction, TypeEvent.Key, specialActionKeyCode));
+
     }
 
     //Private functions
@@ -250,6 +258,25 @@ public class PlayerController : MonoBehaviour
             _jetpackParticle.transform.position = new Vector2(transform.position.x, transform.position.y - 0.5f);
         }
     }
+
+    public void SetupSpecialAction(SpecialAction action)
+    {
+        _availableSpecialAction = action;
+    }
+
+    public void ClearSpecialAction()
+    {
+        _availableSpecialAction = null;
+    }
+
+    public void PerformSpecialAction()
+    {
+        if (_availableSpecialAction != null)
+        {
+            _availableSpecialAction.Perform();
+        }
+    }
+
     private void Fly()
     {
         if (Time.time < _endTimeFly)

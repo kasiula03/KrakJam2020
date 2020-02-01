@@ -16,6 +16,7 @@ public class ShowDialogAction : ActionOnPlayer
             return;
         }
         DialogBox dialog = Instantiate(_dialogTextBoxPrefab, transform.position + _offset, Quaternion.identity, _mainCanvas.transform);
+        dialog.Initialize();
         dialog.Show(_speakerName, _text);
         executed = true;
     }

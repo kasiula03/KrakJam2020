@@ -28,7 +28,13 @@ public class Bullet : MonoBehaviour
         if (col.collider.gameObject.tag != "Player")
         {
             if (col.collider.gameObject.tag == "Enemy")
-                Destroy(col.collider.gameObject);
+            {
+                EnemyKillingCondition killingCondition = col.gameObject.GetComponent<EnemyKillingCondition>();
+                if (killingCondition != null && killingCondition.IsKillable())
+                {
+                    Destroy(col.collider.gameObject);
+                }
+            }
             
             Destroy(gameObject);
         }
