@@ -37,10 +37,6 @@ public class Bullet : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.collider.gameObject.tag != "Player" && col.collider.gameObject.layer != 10)//layer - bullet
-        {
-            return;
-        }
         if (col.collider.gameObject.tag != _sourceTag)
         {
             if (col.collider.gameObject.tag == _enemyTag)
@@ -48,9 +44,18 @@ public class Bullet : MonoBehaviour
                 EnemyKillingCondition killingCondition = col.gameObject.GetComponent<EnemyKillingCondition>();
                 if (killingCondition != null && killingCondition.IsKillable())
                 {
-                    Destroy(col.collider.gameObject);
-                    Destroy(gameObject);
+                    Debug.Log("Killable");
+                    PlayerHealth health = col.gameObject.GetComponent<PlayerHealth>();
+                    if (health != null)
+                    {
+                        health.SubHealth(1);
+                    }
+                    else
+                    {
+                        Destroy(col.collider.gameObject);
+                    }
                 }
+                Destroy(gameObject);
             }
             else
             {

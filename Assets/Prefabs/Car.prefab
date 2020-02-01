@@ -90,7 +90,6 @@ MonoBehaviour:
     type: 3}
   _text: Press Z, to lock a car wheel.
   _speakerName: Triangle Lock
-  _mainCanvas: {fileID: 0}
   _offset: {x: 0, y: 5, z: 0}
 --- !u!1 &3926848633424931770
 GameObject:
@@ -188,9 +187,10 @@ GameObject:
   - component: {fileID: 3926848633693576541}
   - component: {fileID: 530207222}
   - component: {fileID: 530207223}
+  - component: {fileID: 1409836191}
   m_Layer: 9
   m_Name: Car
-  m_TagString: car
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -228,7 +228,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 1}
+  m_Offset: {x: 0.009662628, y: 0.95652467}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -239,7 +239,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3, y: 1.2}
+  m_Size: {x: 3.3478012, y: 1.2869507}
   m_EdgeRadius: 0
 --- !u!114 &3926848633693576536
 MonoBehaviour:
@@ -314,6 +314,7 @@ MonoBehaviour:
   targetInRange: 1
   blocked: 1
   facingRight: 0
+  blind: 0
 --- !u!114 &530207223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -329,6 +330,25 @@ MonoBehaviour:
   isBlocked: 0
   targetInRange: 0
   facingRight: 0
+  blinded: 0
+--- !u!114 &1409836191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3926848633693576534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36d8430cbeff5fc489444ac11744a387, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealthy: 1
+  CurrentHealthy: 1
+  MarginBetweenIcons: 0.1
+  IconsPosition: {fileID: 0}
+  FullHealthIcon: {fileID: 0}
+  EmptyHealthIcon: {fileID: 0}
 --- !u!1 &3926848633920624626
 GameObject:
   m_ObjectHideFlags: 0

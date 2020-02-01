@@ -25,8 +25,11 @@ public class PlayerHealth : MonoBehaviour
     public void SubHealth (int damage)
     {
         CurrentHealthy -= damage;
-        if (CurrentHealthy < 0) 
+        if (CurrentHealthy < 0)
+        {
             CurrentHealthy = 0;
+            Destroy(gameObject);
+        }
 
         RenderIcons();
     }
@@ -46,6 +49,11 @@ public class PlayerHealth : MonoBehaviour
 
     private void RenderIcons()
     {
+        if(IconsPosition == null)
+        {
+            return;
+        }
+
         foreach (var icon in _currentIcons)
             Destroy(icon);
         _currentIcons.Clear();
