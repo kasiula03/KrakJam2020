@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     public string jumpKeyCode       =   "w";
     public string fireKeyCode = "space";
     public string jetpackKeyCode    =   "v";
+    public string specialActionKeyCode = "z";
 
     //private variables
     public delegate void PlayerEvent();
@@ -39,6 +40,7 @@ public class PlayerController : MonoBehaviour
     private GameObject _jetpackParticle = null;
     private SpriteRenderer _sr;
     private int _direction = 1;
+    private SpecialAction _availableSpecialAction;
 
 
     //Helper structures
@@ -116,6 +118,7 @@ public class PlayerController : MonoBehaviour
             fireKeyCode));
         _playerEvents.Add(new EventConfig(Fly, TypeEvent.Key, jetpackKeyCode));
         _playerEvents.Add(new EventConfig(StartFly, TypeEvent.Down, jetpackKeyCode));
+        _playerEvents.Add(new EventConfig(PerformSpecialAction, TypeEvent.Key, specialActionKeyCode));
     }
 
     //Private functions
@@ -190,6 +193,23 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void SetupSpecialAction(SpecialAction action)
+    {
+        _availableSpecialAction = action;
+    }
+
+    public void ClearSpecialAction()
+    {
+        _availableSpecialAction = null;
+    }
+
+    public void PerformSpecialAction()
+    {
+        if (_availableSpecialAction != null)
+        {
+            _availableSpecialAction.Perform();
+        }
+    }
 
     private void Fly()
     {
