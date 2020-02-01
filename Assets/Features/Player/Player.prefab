@@ -328,7 +328,7 @@ MonoBehaviour:
   reloadGunTime: 0.5
   PlayerHealth: {fileID: 1391629775}
   JetpackFuel: {fileID: 8227650870193688156}
-  BulletPrefab: {fileID: 3538726684605360980, guid: de84993bde01e7f49a2706a95739e343,
+  BulletPrefab: {fileID: 2168595441457339279, guid: de84993bde01e7f49a2706a95739e343,
     type: 3}
   JetPackParticlePrefab: {fileID: 7019095592853729841, guid: 7736b978e70083f409c2c00ed20065a1,
     type: 3}
@@ -338,6 +338,7 @@ MonoBehaviour:
   fireKeyCode: space
   jetpackKeyCode: v
   specialActionKeyCode: z
+  currentKeyPressed: 
 --- !u!114 &1391629775
 MonoBehaviour:
   m_ObjectHideFlags: 0

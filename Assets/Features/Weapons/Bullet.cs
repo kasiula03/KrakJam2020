@@ -12,7 +12,6 @@ public class Bullet : MonoBehaviour
     private string _sourceTag;
     private string _enemyTag;
     private float _direction;
-    private Vector3 _target;
 
     void Start()
     {
@@ -21,20 +20,19 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         _deltaTime = Time.deltaTime;
-        transform.position += (_target - transform.position).normalized  * speed * _deltaTime;
+        transform.position += transform.right * speed * _deltaTime;
 
         var distance = Vector2.Distance(_startPosition, transform.position);
         if (distance > maxDistance)
             Destroy(gameObject);
     }
 
-    public void Setup(string sourceTag, string enemyTag, float direction, Vector3 target)
+    public void Setup(string sourceTag, string enemyTag, float direction)
     {
         _sourceTag = sourceTag;
         _enemyTag = enemyTag;
         _direction = direction;
-        _target = target;
-        transform.rotation.SetEulerAngles(new Vector3(0, 0, direction * 45));
+      //  transform.rotation.SetEulerAngles(new Vector3(0, 0, direction * 45));
     }
 
     void OnCollisionEnter2D(Collision2D col)

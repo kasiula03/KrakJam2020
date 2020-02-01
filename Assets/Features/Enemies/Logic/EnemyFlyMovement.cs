@@ -52,7 +52,7 @@ public class EnemyFlyMovement : MonoBehaviour
         Vector3 direction = bullet.transform.position - _playerTarget.position;
         float dir = direction.normalized.x < 0 ? 1 : -1;
         Debug.Log(dir);
-        bullet.Setup("Enemy", "Player", dir, _playerTarget.position);
+        bullet.Setup("Enemy", "Player", dir);
         // rg.AddForce(direction.normalized * Vector2.one);
        // rg.velocity = dir * 3 * Vector2.one;
     }

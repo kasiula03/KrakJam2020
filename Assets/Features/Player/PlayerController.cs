@@ -249,7 +249,7 @@ public class PlayerController : MonoBehaviour
         {
             Bullet newBox = Instantiate(BulletPrefab);
             newBox.transform.position = new Vector2(transform.position.x + 1.5f * _direction, transform.position.y);
-            newBox.Setup("Player", "Enemy", _direction, transform.position + Vector3.right * _direction);
+            newBox.Setup("Player", "Enemy", _direction);
             if (_direction == -1)
                 newBox.transform.Rotate(0, 0, 180);
             lastFireTime = Time.time;
