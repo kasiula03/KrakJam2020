@@ -161,13 +161,13 @@ public class PlayerController : MonoBehaviour
         //_playerEvents.Add(new EventConfig(MoveLeft, TypeEvent.Key, moveLeftKeyCode));
         //_playerEvents.Add(new EventConfig(MoveRight, TypeEvent.Key, moveRightKeyCode));
         _playerEvents.Add(new EventConfig(Abilities.BindableReason.JumpButtonPressed,
-            TypeEvent.Key,
+            TypeEvent.Down,
             jumpKeyCode));
         _playerEvents.Add(new EventConfig(Abilities.BindableReason.FireButtonPressed,
             TypeEvent.Down,
             fireKeyCode));
-        _playerEvents.Add(new EventConfig(Fly, TypeEvent.Key, jetpackKeyCode));
-        _playerEvents.Add(new EventConfig(StartFly, TypeEvent.Down, jetpackKeyCode));
+        //_playerEvents.Add(new EventConfig(Fly, TypeEvent.Down, jetpackKeyCode));
+        //_playerEvents.Add(new EventConfig(StartFly, TypeEvent.Down, jetpackKeyCode));
         _playerEvents.Add(new EventConfig(PerformSpecialAction, TypeEvent.Key, specialActionKeyCode));
 
     }
