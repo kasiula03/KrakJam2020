@@ -14,6 +14,7 @@ public class CodeCanvas : MonoBehaviour
     void Awake()
     {
         transform.localScale = Vector3.zero;
+        Show();
     }
     
     public Tween Show()

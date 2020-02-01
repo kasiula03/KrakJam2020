@@ -3,18 +3,27 @@ using System.Collections.Generic;
 
 public class Abilities
 {
-    public enum Bindable
+    public enum BindableReason
+    {
+        JumpButtonPressed,
+        FireButtonPressed,
+    }
+    
+    public enum BindableReaction
     {
         Jump,
         Fire,
-        VomitAnimation,
+        Vomit,
+        Null
     }
 
-    public static Dictionary<Bindable, Action<PlayerController>> BindedActions =
-        new Dictionary<Bindable, Action<PlayerController>>()
+    public static Dictionary<BindableReaction, Action<PlayerController>> BindedActions =
+        new Dictionary<BindableReaction, Action<PlayerController>>()
         {    
-            { Bindable.Jump, ExecuteJump },
-            { Bindable.Fire, ExecuteFire }
+            { BindableReaction.Jump, ExecuteJump },
+            { BindableReaction.Fire, ExecuteFire },
+            { BindableReaction.Null, _ => { }},
+            { BindableReaction.Vomit, _ => { }}
         };
 
     public static void ExecuteFire(PlayerController player)
@@ -27,39 +36,6 @@ public class Abilities
         player.Jump();
     }
     
-    public static string[] OnEvents = 
-    {
-        "OnPressJumpButton",
-        "OnPressFireButton",
-        "OnEnterFire",
-        "OnReactWithWater",
-        "OnReactWithElectric"
-    };
-
-    public static string[] SingleButtonActions =
-    {
-        "Jump",
-        "ShootLaser",
-        "Vomit",
-        "Die",
-        "Duck",
-        "WaterGun",
-        "null",
-        "Roll"
-    };
-
-    public static string[] OneParameterActions =
-    {
-        "UnlockPower"
-    };
-
     public static List<string> UnlockedAbilities = new List<string>();
 
-    public static void AddUnlockedAbility(string ability)
-    {
-        if (UnlockedAbilities.Contains(ability))
-            return;
-        
-        UnlockedAbilities.Add(ability);
-    }
 }

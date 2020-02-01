@@ -5,16 +5,16 @@ using Zenject;
 public class OnCollectUnlockAbility : MonoBehaviour
 {
     [Inject] private PlayerAbilitiesLogic _playerAbilities;
-    [SerializeField] private string _abilityName = string.Empty;
+    [SerializeField] private Abilities.BindableReaction ability = Abilities.BindableReaction.Null;
 
     void Start()
     {
-        Assert.IsFalse(string.IsNullOrEmpty(_abilityName));
+        Assert.IsFalse(ability == Abilities.BindableReaction.Null);
     }
     
     // TODO - call when player collects this item
     public void OnCollect()
     {
-        _playerAbilities.UnlockAbility(_abilityName);
+        _playerAbilities.UnlockAbility(ability);
     }
 }

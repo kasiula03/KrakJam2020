@@ -2,9 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class PlayerController : MonoBehaviour
 {
+
+    [Inject] private readonly PlayerAbilitiesLogic _playerAbilitiesLogic;
+    
     //Unity objects
     public Transform playerPostiion;
 
@@ -39,7 +43,7 @@ public class PlayerController : MonoBehaviour
     {
         public bool resolve;
         public PlayerEvent eventFunction;
-        public Abilities.Bindable resolver;
+        public Abilities.BindableReason resolver;
         public TypeEvent eventType;
         public string keyCode;
         public EventConfig(PlayerEvent _eventFunction, TypeEvent _eventType, string _keyCode)
@@ -48,10 +52,10 @@ public class PlayerController : MonoBehaviour
             eventType = _eventType;
             keyCode = _keyCode;
             resolve = false;
-            resolver = Abilities.Bindable.VomitAnimation;
+            resolver = Abilities.BindableReason.FireButtonPressed;
         }
 
-        public EventConfig(Abilities.Bindable bind, TypeEvent eventType, string keyCode)
+        public EventConfig(Abilities.BindableReason bind, TypeEvent eventType, string keyCode)
         {
             resolver = bind;
             this.eventType = eventType;
@@ -85,8 +89,13 @@ public class PlayerController : MonoBehaviour
     {
         _playerEvents.Add(new EventConfig(MoveLeft, TypeEvent.Key, moveLeftKeyCode));
         _playerEvents.Add(new EventConfig(MoveRight, TypeEvent.Key, moveRightKeyCode));
-        _playerEvents.Add(new EventConfig(Abilities.Bindable.Jump, TypeEvent.Down, jumpKeyCode));
-        _playerEvents.Add(new EventConfig(Abilities.Bindable.Fire, TypeEvent.Down, fireKeyCode));
+        
+        _playerEvents.Add(new EventConfig(Abilities.BindableReason.JumpButtonPressed,
+            TypeEvent.Down,
+            jumpKeyCode));
+        _playerEvents.Add(new EventConfig(Abilities.BindableReason.FireButtonPressed,
+            TypeEvent.Down,
+            fireKeyCode));
     }
 
     //Private functions
@@ -100,24 +109,34 @@ public class PlayerController : MonoBehaviour
                     if (Input.GetKeyDown(playerEvent.keyCode))
                     {
                         playerEvent.eventFunction?.Invoke();
-                        if(playerEvent.resolve)
-                            Abilities.BindedActions[playerEvent.resolver].Invoke(this);
+                        if (playerEvent.resolve)
+                        {
+                            Abilities.BindedActions[_playerAbilitiesLogic.GetProperty(playerEvent.resolver).Value]
+                                .Invoke((this));
+                            //Abilities.BindedActions[playerEvent.resolver].Invoke(this);
+                        }
                     }
                     break;
                 case TypeEvent.Key:
                     if (Input.GetKey(playerEvent.keyCode))
                     {
                         playerEvent.eventFunction?.Invoke();
-                        if(playerEvent.resolve)
-                            Abilities.BindedActions[playerEvent.resolver].Invoke(this);
+                        if (playerEvent.resolve)
+                        {
+                            Abilities.BindedActions[_playerAbilitiesLogic.GetProperty(playerEvent.resolver).Value]
+                                .Invoke((this));
+                        }
                     }
                     break;
                 case TypeEvent.Up:
                     if (Input.GetKeyUp(playerEvent.keyCode))
                     {
                         playerEvent.eventFunction?.Invoke();
-                        if(playerEvent.resolve)
-                            Abilities.BindedActions[playerEvent.resolver].Invoke(this);
+                        if (playerEvent.resolve)
+                        {
+                            Abilities.BindedActions[_playerAbilitiesLogic.GetProperty(playerEvent.resolver).Value]
+                                .Invoke((this));
+                        }
                     }
                     break;
             }

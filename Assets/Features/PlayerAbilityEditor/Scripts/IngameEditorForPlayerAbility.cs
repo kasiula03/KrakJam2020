@@ -10,8 +10,8 @@ public class IngameEditorForPlayerAbility : MonoBehaviour
     [Inject] private PlayerAbilitiesLogic _playerAbilities;
     
     [SerializeField] private TMP_Dropdown _dropdown;
-    [SerializeField] private string _targetKey = string.Empty;
-    private StringReactiveProperty _watchProperty { get; set; }
+    [SerializeField] private Abilities.BindableReason _targetKey;
+    private ReactiveProperty<Abilities.BindableReaction> _watchProperty { get; set; }
 
     void Reset()
     {
@@ -20,14 +20,17 @@ public class IngameEditorForPlayerAbility : MonoBehaviour
 
     void Start()
     {
+        _playerAbilities.UnlockAbility(Abilities.BindableReaction.Fire);
+        _playerAbilities.UnlockAbility(Abilities.BindableReaction.Jump);
+        
         _watchProperty = _playerAbilities.GetProperty(_targetKey);
-        Abilities.AddUnlockedAbility(_watchProperty.Value);
-        _dropdown.options.Clear();
+        _playerAbilities.UnlockAbility(_watchProperty.Value);
+        _dropdown.ClearOptions();
         int i = 0;
         int selected = 0;
-        foreach (var ability in Abilities.UnlockedAbilities)
+        foreach (var ability in _playerAbilities.UnlockedAbilities)
         {
-            _dropdown.options.Add(new TMP_Dropdown.OptionData(ability));
+            _dropdown.options.Add(new TMP_Dropdown.OptionData(ability.ToString()));
             if (_watchProperty.Value == ability)
             {
                 selected = i;
@@ -37,13 +40,15 @@ public class IngameEditorForPlayerAbility : MonoBehaviour
         }
 
         _dropdown.value = selected;
+        _dropdown.RefreshShownValue();
         
         _dropdown.onValueChanged.AddListener(OnSelectedValueChanged);
     }
 
     void OnSelectedValueChanged(int value)
     {
-        _watchProperty.Value = _dropdown.options[value].text;
+        _watchProperty.Value = (Abilities.BindableReaction)
+            Enum.Parse(typeof(Abilities.BindableReaction), _dropdown.options[value].text);
     }
 
     private void OnDestroy()

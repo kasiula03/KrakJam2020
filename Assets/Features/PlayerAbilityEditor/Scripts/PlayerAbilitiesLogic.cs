@@ -1,14 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UniRx;
 using Zenject;
 
 public class PlayerAbilitiesLogic : IInitializable, IDisposable
 {
-    readonly Dictionary<string, StringReactiveProperty> OnEventPerformActionDictionary
-        = new Dictionary<string, StringReactiveProperty>();
+    readonly Dictionary<Abilities.BindableReason, ReactiveProperty<Abilities.BindableReaction>> OnEventPerformActionDictionary
+        = new Dictionary<Abilities.BindableReason, ReactiveProperty<Abilities.BindableReaction>>();
 
-    readonly ReactiveCollection<string> UnlockedAbilities = new ReactiveCollection<string>();
+    readonly ReactiveCollection<Abilities.BindableReaction> unlockedAbilities 
+        = new ReactiveCollection<Abilities.BindableReaction>();
+
+    public IReadOnlyList<Abilities.BindableReaction> UnlockedAbilities
+    {
+        get => unlockedAbilities.ToList();
+    }
     
     public void Initialize()
     {
@@ -20,15 +27,15 @@ public class PlayerAbilitiesLogic : IInitializable, IDisposable
         
     }
 
-    public void UnlockAbility(string ability)
+    public void UnlockAbility(Abilities.BindableReaction ability)
     {
-        if (UnlockedAbilities.Contains(ability))
+        if (unlockedAbilities.Contains(ability))
             return;
 
-        UnlockedAbilities.Add(ability);
+        unlockedAbilities.Add(ability);
     }
 
-    public StringReactiveProperty GetProperty(string key)
+    public ReactiveProperty<Abilities.BindableReaction> GetProperty(Abilities.BindableReason key)
     {
         return OnEventPerformActionDictionary[key];
     }
@@ -36,14 +43,14 @@ public class PlayerAbilitiesLogic : IInitializable, IDisposable
     void SetupBaseAbilities()
     {
         OnEventPerformActionDictionary.Clear();
-        foreach (var key in Abilities.OnEvents)
+        foreach (var key in (Abilities.BindableReason[])Enum.GetValues(typeof(Abilities.BindableReason)))
         {
             AddEmpty(key);
         }
         
-        void AddEmpty(string key)
+        void AddEmpty(Abilities.BindableReason key)
         {
-            OnEventPerformActionDictionary.Add(key, new StringReactiveProperty(string.Empty));
+            OnEventPerformActionDictionary.Add(key, new ReactiveProperty<Abilities.BindableReaction>(Abilities.BindableReaction.Null));
         }
     }
 }
