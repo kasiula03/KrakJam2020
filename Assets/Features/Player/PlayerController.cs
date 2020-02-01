@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Rendering;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -10,6 +7,8 @@ public class PlayerController : MonoBehaviour
     [Inject] private readonly PlayerAbilitiesLogic _playerAbilitiesLogic;
     [SerializeField] private Transform _checkOnGround;
     [SerializeField] private LayerMask _layerMask;
+    [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] private FakeAnimationThatIWillUseInsteadOfUsingBuiltinUnityAnimator _anim;
     
     //Player Parameters
     public float playerMoveSpeed    = 7f;
@@ -40,9 +39,14 @@ public class PlayerController : MonoBehaviour
     private bool _isGrounded = false;
     private float _endTimeFly = 0;
     private GameObject _jetpackParticle = null;
-    private SpriteRenderer _sr;
+    
     private int _direction = 1;
     private SpecialAction _availableSpecialAction;
+
+    public Vector2 VerticalDirection
+    {
+        get => _direction == -1 ? Vector2.left : Vector2.right;
+    }
 
 
     //Helper structures
@@ -77,18 +81,47 @@ public class PlayerController : MonoBehaviour
             resolve = true;
         }
     }
-
-
+    
     // Unity functions
     void Start()
     {
         InitPlayerEvents();
         _rb = GetComponent<Rigidbody2D>();
-		_sr = GetComponent<SpriteRenderer>();
     }
-    void FixedUpdate()
+    
+    //void Update()
+
+    FakeAnimationThatIWillUseInsteadOfUsingBuiltinUnityAnimator.States CalculateState()
     {
-        this._isGrounded = CalculateIsGrounded();
+        if (!_isGrounded)
+        {
+            return FakeAnimationThatIWillUseInsteadOfUsingBuiltinUnityAnimator.States.JUMP_1;
+        }
+
+        if (left || right)
+        {
+            return FakeAnimationThatIWillUseInsteadOfUsingBuiltinUnityAnimator.States.RUN;
+        }
+
+        return FakeAnimationThatIWillUseInsteadOfUsingBuiltinUnityAnimator.States.IDLE;
+        
+    }
+
+    private bool left = false;
+    private bool right = false;
+
+    void CollectInput()
+    {
+        left = Input.GetKey(moveLeftKeyCode);
+        right = Input.GetKey(moveRightKeyCode);
+    }
+    
+    void Update()
+    {
+        _isGrounded = CalculateIsGrounded();
+        CollectInput();
+        
+        _anim.SetAnimationState(CalculateState());
         
         bool movementThisFrame = false;
         PlayerMovement();
@@ -104,8 +137,7 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(_jetpackParticle);
         }
-
-
+        
         if (col.collider.gameObject.tag == "healthPoint")
         {
             AddHealth(1);
@@ -126,10 +158,10 @@ public class PlayerController : MonoBehaviour
     //Public functions
     public void InitPlayerEvents()
     {
-        _playerEvents.Add(new EventConfig(MoveLeft, TypeEvent.Key, moveLeftKeyCode));
-        _playerEvents.Add(new EventConfig(MoveRight, TypeEvent.Key, moveRightKeyCode));
+        //_playerEvents.Add(new EventConfig(MoveLeft, TypeEvent.Key, moveLeftKeyCode));
+        //_playerEvents.Add(new EventConfig(MoveRight, TypeEvent.Key, moveRightKeyCode));
         _playerEvents.Add(new EventConfig(Abilities.BindableReason.JumpButtonPressed,
-            TypeEvent.Down,
+            TypeEvent.Key,
             jumpKeyCode));
         _playerEvents.Add(new EventConfig(Abilities.BindableReason.FireButtonPressed,
             TypeEvent.Down,
@@ -137,11 +169,15 @@ public class PlayerController : MonoBehaviour
         _playerEvents.Add(new EventConfig(Fly, TypeEvent.Key, jetpackKeyCode));
         _playerEvents.Add(new EventConfig(StartFly, TypeEvent.Down, jetpackKeyCode));
         _playerEvents.Add(new EventConfig(PerformSpecialAction, TypeEvent.Key, specialActionKeyCode));
+
     }
 
     //Private functions
     private void PlayerMovement()
     {
+        if(left) MoveLeft();
+        if(right) MoveRight();
+        
         foreach (var playerEvent in _playerEvents)
         {
             switch (playerEvent.eventType)
@@ -259,14 +295,14 @@ public class PlayerController : MonoBehaviour
     private void MoveLeft()
     {
         _direction = -1;
-        _sr.flipX = false;
+        _spriteRenderer.flipX = true;
         VerticalMovement(Vector2.left);
     }
     
     private void MoveRight()
     {
         _direction = 1;
-        _sr.flipX = true;
+        _spriteRenderer.flipX = false;
         VerticalMovement(Vector2.right);
     }
     
@@ -291,7 +327,7 @@ public class PlayerController : MonoBehaviour
 
     private void ApplyBraking()
     {
-        if (_isGrounded)
+        if (_isGrounded && !left && !right)
         {
             float newX = _rb.velocity.x * .9f;
             _rb.velocity = new Vector2(newX, _rb.velocity.y); 
@@ -300,9 +336,7 @@ public class PlayerController : MonoBehaviour
 
     private bool CalculateIsGrounded()
     {
-        //var k = new List<RaycastHit2D>();
         if(Physics2D.Linecast(this.transform.position, _checkOnGround.position, _layerMask))
-        //if(Physics2D.Linecast(this.transform.position, _checkOnGround.position, _layerMask, k))
         {
             return true;
         }
