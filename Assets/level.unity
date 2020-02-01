@@ -4452,6 +4452,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1242943278}
     m_Modifications:
+    - target: {fileID: 7804728462441654567, guid: 572f7193481d297498cefbac38725db3,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 255
+      objectReference: {fileID: 0}
     - target: {fileID: 7804728462441654570, guid: 572f7193481d297498cefbac38725db3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5156,6 +5161,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _target: {fileID: 160213471}
   mulInterpolation: {x: 2.5, y: 999}
+  _offset: {x: 0, y: 0}
 --- !u!1 &1262322397
 GameObject:
   m_ObjectHideFlags: 0
