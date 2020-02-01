@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class JetpackFuel : MonoBehaviour
 {
+    [Inject] private PlayerAbilitiesLogic _playerAbilities;
+
     public float jetpackForce = 15f;
 
     public float maxFuel = 100;
@@ -14,6 +17,10 @@ public class JetpackFuel : MonoBehaviour
 
     private bool _isLaunched = false;
 
+    private void Start()
+    {
+        _playerAbilities.UnlockedAbilitiesChanged += this.DiplayFuelStatus;
+    }
     void FixedUpdate()
     {
         if (!_isLaunched && fuel != maxFuel)
@@ -26,6 +33,18 @@ public class JetpackFuel : MonoBehaviour
         }
     }
 
+
+    private void DiplayFuelStatus()
+    {
+        foreach (var ability in _playerAbilities.UnlockedAbilities)
+        {
+            if(ability == Abilities.BindableReaction.Jetpack)
+            {
+                var canvas = fuelStatusUI.GetComponentInParent<Transform>().GetComponentInParent<Canvas>();
+                canvas.enabled = true;
+            }
+        }
+    }
     public void LaunchJetpack()
     {
         _isLaunched = true;
