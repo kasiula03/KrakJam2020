@@ -91,6 +91,7 @@ public class EnemyMovement : MonoBehaviour
         {
             //todo: action of player
             _actionOnPlayer.DoAction(_playerTarget.position);
+            _actionOnPlayer.SetInvoker(_playerTarget);
         }
         else if(distance < 1f)
         {

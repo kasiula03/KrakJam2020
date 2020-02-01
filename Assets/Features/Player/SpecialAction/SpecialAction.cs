@@ -27,6 +27,7 @@ public abstract class SpecialAction : MonoBehaviour
         {
             Debug.Log("Player exit range");
             player.ClearSpecialAction();
+            _showDialogAction.HideWindow();
         }
     }
 

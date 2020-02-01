@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using TMPro;
+using System;
 
 public class DialogBox : MonoBehaviour
 {
@@ -20,6 +21,12 @@ public class DialogBox : MonoBehaviour
         _speach.text = text;
         Sequence displayText = DOTween.Sequence();
         displayText.Append(transform.DOScale(Vector3.one, 1f).SetEase(Ease.InCirc));
+    }
 
+    public void Hide(Action postHide)
+    {
+        Sequence displayText = DOTween.Sequence();
+        displayText.Append(transform.DOScale(Vector3.zero, 1f).SetEase(Ease.InCirc));
+        displayText.onComplete += () => postHide.Invoke();
     }
 }
