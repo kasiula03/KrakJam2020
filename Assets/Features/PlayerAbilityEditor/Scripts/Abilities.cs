@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class Abilities
 {
@@ -7,6 +8,7 @@ public class Abilities
     {
         JumpButtonPressed,
         FireButtonPressed,
+        JetpackButtonPressed,
     }
     
     public enum BindableReaction
@@ -14,6 +16,7 @@ public class Abilities
         Jump,
         Fire,
         Vomit,
+        Jetpack,
         Null
     }
 
@@ -22,6 +25,7 @@ public class Abilities
         {    
             { BindableReaction.Jump, ExecuteJump },
             { BindableReaction.Fire, ExecuteFire },
+            { BindableReaction.Jetpack, ExecuteJetpack },
             { BindableReaction.Null, _ => { }},
             { BindableReaction.Vomit, _ => { }}
         };
@@ -30,7 +34,13 @@ public class Abilities
     {
         player.Fire();
     }
-    
+
+    //public static bool isJetPack = false;
+    public static void ExecuteJetpack(PlayerController player)
+    {
+        var usedButton = player.currentKeyPressed;
+        player.StartFly(usedButton);
+    }
     public static void ExecuteJump(PlayerController player)
     {
         player.Jump();
