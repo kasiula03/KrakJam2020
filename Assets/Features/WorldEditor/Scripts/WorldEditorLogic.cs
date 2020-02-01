@@ -18,9 +18,9 @@ public class WorldEditorLogic : IDisposable, IInitializable
     
     
 
-    readonly FloatReactiveProperty Gravity = new FloatReactiveProperty(1f);
-    readonly FloatReactiveProperty MinGravity = new FloatReactiveProperty(-1f);
-    readonly FloatReactiveProperty MaxGravity = new FloatReactiveProperty(2f);
+    readonly FloatReactiveProperty Gravity = new FloatReactiveProperty(9f);
+    readonly FloatReactiveProperty MinGravity = new FloatReactiveProperty(-9f);
+    readonly FloatReactiveProperty MaxGravity = new FloatReactiveProperty(12f);
 
     readonly FloatReactiveProperty ColorRed = new FloatReactiveProperty(1);
     readonly FloatReactiveProperty ColorGreen = new FloatReactiveProperty(1);

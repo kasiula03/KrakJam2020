@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 using Zenject;
 
 public class PlayerController : MonoBehaviour
 {
-
     [Inject] private readonly PlayerAbilitiesLogic _playerAbilitiesLogic;
+    [SerializeField] private Transform _checkOnGround;
+    [SerializeField] private LayerMask _layerMask;
     
-    //Unity objects
-    public Transform playerPostiion;
-
     //Player Parameters
     public float playerMoveSpeed    = 7f;
-    public float playerMoveMaxSpeed = 3f;
+    public Vector2 playerMoveMaxSpeed = new Vector2(3f, 5f);
     public float jumpForce          = 5f;
 
     //Control keys
@@ -26,7 +25,6 @@ public class PlayerController : MonoBehaviour
     //private variables
     public delegate void PlayerEvent();
 
-    private float _deltaTime;
     private List<EventConfig> _playerEvents = new List<EventConfig>();
     private Rigidbody2D _rb;
     private bool _isGrounded = false;
@@ -74,15 +72,22 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
-        _deltaTime = Time.deltaTime;
+        this._isGrounded = CalculateIsGrounded();
+        
+        bool movementThisFrame = false;
         PlayerMovement();
-      
+        if (movementThisFrame == false)
+        {
+            ApplyBraking();
+        }
     }
+    
+    /*
     void OnCollisionEnter2D(Collision2D col)
     {
         _isGrounded = true;
     }
-
+    */
 
     //Public functions
     public void InitPlayerEvents()
@@ -113,7 +118,6 @@ public class PlayerController : MonoBehaviour
                         {
                             Abilities.BindedActions[_playerAbilitiesLogic.GetProperty(playerEvent.resolver).Value]
                                 .Invoke((this));
-                            //Abilities.BindedActions[playerEvent.resolver].Invoke(this);
                         }
                     }
                     break;
@@ -156,32 +160,55 @@ public class PlayerController : MonoBehaviour
             _isGrounded = false;
         }
     }
+
+    
     private void MoveLeft()
     {
-        if (_isGrounded)
-        {
-            if (_rb.velocity.magnitude > playerMoveMaxSpeed)
-            {
-                _rb.velocity = _rb.velocity.normalized * playerMoveMaxSpeed;
-            }
-            else
-            {
-                _rb.AddForce(Vector2.left * _deltaTime * playerMoveSpeed, ForceMode2D.Impulse);
-            }
-        }
+        VerticalMovement(Vector2.left);
     }
+    
     private void MoveRight()
+    {
+        VerticalMovement(Vector2.right);
+    }
+    
+    private void VerticalMovement(Vector2 direction)
     {
         if (_isGrounded)
         {
-            if (_rb.velocity.magnitude > playerMoveMaxSpeed)
-            {
-                _rb.velocity = _rb.velocity.normalized * playerMoveMaxSpeed;
-            }
-            else
-            {
-                _rb.AddForce(Vector2.right * _deltaTime * playerMoveSpeed, ForceMode2D.Impulse);
-            }
+            _rb.velocity += (direction * playerMoveSpeed * Time.deltaTime);
         }
+        else
+        {
+            _rb.velocity += (direction * playerMoveSpeed * .01f * Time.deltaTime);
+        }
+
+        if (Mathf.Abs(_rb.velocity.x) > playerMoveMaxSpeed.x)
+        {
+            float newX = _rb.velocity.x > 0 ? playerMoveMaxSpeed.x : -playerMoveMaxSpeed.x;
+            
+            _rb.velocity = new Vector2(newX, _rb.velocity.y);
+        }
+    }
+
+    private void ApplyBraking()
+    {
+        if (_isGrounded)
+        {
+            float newX = _rb.velocity.x * .9f;
+            _rb.velocity = new Vector2(newX, _rb.velocity.y); 
+        }
+    }
+
+    private bool CalculateIsGrounded()
+    {
+        //var k = new List<RaycastHit2D>();
+        if(Physics2D.Linecast(this.transform.position, _checkOnGround.position, _layerMask))
+        //if(Physics2D.Linecast(this.transform.position, _checkOnGround.position, _layerMask, k))
+        {
+            return true;
+        }
+
+        return false;
     }
 }
