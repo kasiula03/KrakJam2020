@@ -20,11 +20,18 @@ public class IngameEditorForPlayerAbility : MonoBehaviour
 
     void Start()
     {
-        _playerAbilities.UnlockAbility(Abilities.BindableReaction.Fire);
-        _playerAbilities.UnlockAbility(Abilities.BindableReaction.Jump);
-        
+        //_playerAbilities.UnlockAbility(Abilities.BindableReaction.Fire);
+        //_playerAbilities.UnlockAbility(Abilities.BindableReaction.Jump);
+
+        _playerAbilities.UnlockedAbilitiesChanged += this.RefreshAbilities;
         _watchProperty = _playerAbilities.GetProperty(_targetKey);
         _playerAbilities.UnlockAbility(_watchProperty.Value);
+        this.RefreshAbilities();
+        
+    }
+
+    void RefreshAbilities()
+    {
         _dropdown.ClearOptions();
         int i = 0;
         int selected = 0;
@@ -52,7 +59,8 @@ public class IngameEditorForPlayerAbility : MonoBehaviour
     }
 
     private void OnDestroy()
-    { 
+    {
+        _playerAbilities.UnlockedAbilitiesChanged -= this.RefreshAbilities;
         _dropdown.onValueChanged.RemoveAllListeners();
     }
 }

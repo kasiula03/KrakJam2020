@@ -6,11 +6,15 @@ using Zenject;
 
 public class PlayerAbilitiesLogic : IInitializable, IDisposable
 {
+    public event Action UnlockedAbilitiesChanged;
+    
     readonly Dictionary<Abilities.BindableReason, ReactiveProperty<Abilities.BindableReaction>> OnEventPerformActionDictionary
         = new Dictionary<Abilities.BindableReason, ReactiveProperty<Abilities.BindableReaction>>();
 
     readonly ReactiveCollection<Abilities.BindableReaction> unlockedAbilities 
         = new ReactiveCollection<Abilities.BindableReaction>();
+
+    private CompositeDisposable _compositeDisposable = new CompositeDisposable();
 
     public IReadOnlyList<Abilities.BindableReaction> UnlockedAbilities
     {
@@ -20,11 +24,12 @@ public class PlayerAbilitiesLogic : IInitializable, IDisposable
     public void Initialize()
     {
         SetupBaseAbilities();
+        unlockedAbilities.ObserveAdd().Subscribe(_ => UnlockedAbilitiesChanged?.Invoke()).AddTo(_compositeDisposable);
     }
 
     public void Dispose()
     {
-        
+        _compositeDisposable.Dispose();
     }
 
     public void UnlockAbility(Abilities.BindableReaction ability)
