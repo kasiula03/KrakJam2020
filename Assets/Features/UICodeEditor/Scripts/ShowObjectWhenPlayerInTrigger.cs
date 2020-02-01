@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class ShowObjectWhenPlayerInTrigger : MonoBehaviour
 {
     [SerializeField] private CodeCanvas _object;
-    
-
 
     void Reset()
     {
