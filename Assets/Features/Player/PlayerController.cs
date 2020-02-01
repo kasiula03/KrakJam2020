@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
 
     public PlayerHealth PlayerHealth;
     public JetpackFuel JetpackFuel;
+    public DeathWindow DeathWindow;
 
     //Prefabs to spawn
     public Bullet BulletPrefab;
@@ -106,15 +107,25 @@ public class PlayerController : MonoBehaviour
             return FakeAnimationThatIWillUseInsteadOfUsingBuiltinUnityAnimator.States.JUMP_1;
         }
 
+        if (PlayerHealth.CurrentHealthy <= 0)
+        {
+            if (!isDeadState)
+            {
+                DeathWindow.enabled = true;
+                DeathWindow.InitWindow();
+            }
+            isDeadState = true;
+            return FakeAnimationThatIWillUseInsteadOfUsingBuiltinUnityAnimator.States.DEAD;
+        }
         if (left || right)
         {
             return FakeAnimationThatIWillUseInsteadOfUsingBuiltinUnityAnimator.States.RUN;
         }
 
         return FakeAnimationThatIWillUseInsteadOfUsingBuiltinUnityAnimator.States.IDLE;
-        
     }
 
+    private bool isDeadState = false;
     private bool left = false;
     private bool right = false;
 
@@ -131,11 +142,14 @@ public class PlayerController : MonoBehaviour
         
         _anim.SetAnimationState(CalculateState());
         
-        bool movementThisFrame = false;
-        PlayerMovement();
-        if (movementThisFrame == false)
+        if (!isDeadState)
         {
-            ApplyBraking();
+            bool movementThisFrame = false;
+            PlayerMovement();
+            if (movementThisFrame == false)
+            {
+                ApplyBraking();
+            }
         }
         
         _cameraFollowTransform.localPosition = new Vector2
@@ -198,8 +212,12 @@ public class PlayerController : MonoBehaviour
     //Private functions
     private void PlayerMovement()
     {
-        if(left) MoveLeft();
-        if(right) MoveRight();
+        if(left)
+            Abilities.BindedActions[_playerAbilitiesLogic.GetProperty(Abilities.BindableReason.LeftMovement).Value].Invoke(this);
+            
+        if(right)
+            Abilities.BindedActions[_playerAbilitiesLogic.GetProperty(Abilities.BindableReason.RightMovement).Value].Invoke(this);
+        
         collectionHasBeenChanged = false;
         foreach (var playerEvent in _playerEvents)
         {
@@ -272,8 +290,6 @@ public class PlayerController : MonoBehaviour
     public void SubHealth (int damage)
     {
         PlayerHealth.SubHealth(damage);
-        if (PlayerHealth.CurrentHealthy <= 0)
-            Destroy(gameObject);
     }
     public void AddHealth(int additionalHealth)
     {
@@ -335,14 +351,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void MoveLeft()
+    public void MoveLeft()
     {
         _direction = -1;
         _spriteRenderer.flipX = true;
         VerticalMovement(Vector2.left);
     }
     
-    private void MoveRight()
+    public void MoveRight()
     {
         _direction = 1;
         _spriteRenderer.flipX = false;

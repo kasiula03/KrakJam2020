@@ -10,6 +10,9 @@ public class Abilities
         FireButtonPressed,
         JetpackButtonPressed,
         LockWheelButtonPressed,
+        LeftMovement,
+        RightMovement,
+
     }
     
     public enum BindableReaction
@@ -18,9 +21,13 @@ public class Abilities
         Fire,
         Vomit,
         Jetpack,
+
+        MoveLeft,
+        MoveRight,
         Lock,
-        Null
+        Null,
     }
+    
 
     public static Dictionary<BindableReaction, Action<PlayerController>> BindedActions =
         new Dictionary<BindableReaction, Action<PlayerController>>()
@@ -30,7 +37,9 @@ public class Abilities
             { BindableReaction.Jetpack, ExecuteJetpack },
             { BindableReaction.Lock, ExecuteLock },
             { BindableReaction.Null, _ => { }},
-            { BindableReaction.Vomit, _ => { }}
+            { BindableReaction.Vomit, _ => { }},
+            { BindableReaction.MoveLeft, ExecuteMoveLeft},
+            { BindableReaction.MoveRight, ExecuteMoveRight},
         };
 
     public static void ExecuteLock(PlayerController player)
@@ -41,6 +50,16 @@ public class Abilities
     public static void ExecuteFire(PlayerController player)
     {
         player.Fire();
+    }
+
+    public static void ExecuteMoveLeft(PlayerController player)
+    {
+        player.MoveLeft();
+    }
+
+    public static void ExecuteMoveRight(PlayerController player)
+    {
+        player.MoveRight();
     }
 
     //public static bool isJetPack = false;

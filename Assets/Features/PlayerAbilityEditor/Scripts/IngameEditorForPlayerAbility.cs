@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TMPro;
 using UniRx;
 using UnityEngine;
@@ -20,22 +21,33 @@ public class IngameEditorForPlayerAbility : MonoBehaviour
 
     void Start()
     {
-        _playerAbilities.UnlockAbility(Abilities.BindableReaction.Fire);
-        _playerAbilities.UnlockAbility(Abilities.BindableReaction.Jump);
+        //_playerAbilities.UnlockAbility(Abilities.BindableReaction.Fire);
+        //_playerAbilities.UnlockAbility(Abilities.BindableReaction.Jump);
 
         _playerAbilities.UnlockedAbilitiesChanged += this.RefreshAbilities;
         _watchProperty = _playerAbilities.GetProperty(_targetKey);
         _playerAbilities.UnlockAbility(_watchProperty.Value);
-        this.RefreshAbilities();
+        RefreshAbilities();
         
     }
+
+    private static List<Abilities.BindableReaction> MovementFilter = new List<Abilities.BindableReaction>()
+    {
+        Abilities.BindableReaction.MoveLeft,
+        Abilities.BindableReaction.MoveRight
+    };
 
     void RefreshAbilities()
     {
         _dropdown.ClearOptions();
+        var abilitiesList = _playerAbilities.UnlockedAbilities;
+        if (_targetKey == Abilities.BindableReason.LeftMovement || _targetKey == Abilities.BindableReason.RightMovement)
+        {
+            abilitiesList = MovementFilter;
+        }
         int i = 0;
         int selected = 0;
-        foreach (var ability in _playerAbilities.UnlockedAbilities)
+        foreach (var ability in abilitiesList)
         {
             _dropdown.options.Add(new TMP_Dropdown.OptionData(ability.ToString()));
             if (_watchProperty.Value == ability)
