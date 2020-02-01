@@ -7,6 +7,7 @@ public class EnemyKillingCondition : MonoBehaviour
     public bool targetInRange;
     public bool blocked;
     public bool facingRight;
+    public bool blind;
 
     private void Start()
     {
