@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
-
+using Zenject;
 
 public class ShowDialogAction : ActionOnPlayer
 {
     [SerializeField] private DialogBox _dialogTextBoxPrefab;
     [SerializeField] private string _text;
     [SerializeField] private string _speakerName;
-    [SerializeField] private Canvas _mainCanvas;
     [SerializeField] private Vector3 _offset;
+
+    [Inject(Id = "DialogCanvas")] private Canvas _mainCanvas;
 
     private DialogBox _dialogBox;
 

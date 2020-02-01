@@ -8,6 +8,7 @@ TagManager:
   - asteroid
   - healthPoint
   - car
+  - Enemy
   layers:
   - Default
   - TransparentFX
