@@ -19,8 +19,6 @@ public class PlayerController : MonoBehaviour
     public float playerMoveSpeed    = 7f;
     public Vector2 playerMoveMaxSpeed = new Vector2(3f, 5f);
     public float jumpForce          = 5f;
-    public float jetpackForce       = 15f;
-    public float maxTimeFly = 2f;
     public float reloadGunTime = 0.5f;
 
     public PlayerHealth PlayerHealth;

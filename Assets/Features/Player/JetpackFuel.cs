@@ -10,7 +10,7 @@ public class JetpackFuel : MonoBehaviour
     public float fuel = 100;
     public float fuelFireSpeed = 50f;
     public float fuelGenerationSpeed = 30f;
-    public RectTransform fuelStatus;
+    public RectTransform fuelStatusUI;
 
     private bool _isLaunched = false;
 
@@ -54,7 +54,7 @@ public class JetpackFuel : MonoBehaviour
     private void UpdateFuelStatus(int percentage)
     {
         percentage *= 2;
-        fuelStatus.offsetMax = new Vector2(-(200-percentage), fuelStatus.offsetMax.y);
+        fuelStatusUI.offsetMax = new Vector2(-(200-percentage), fuelStatusUI.offsetMax.y);
     }
 
 }
