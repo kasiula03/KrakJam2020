@@ -15,12 +15,19 @@ public class PlayerController : MonoBehaviour
     public float playerMoveSpeed    = 7f;
     public Vector2 playerMoveMaxSpeed = new Vector2(3f, 5f);
     public float jumpForce          = 5f;
+    public float jetpackForce       = 15f;
+    public float maxTimeFly = 2f;
+    
+    //Prefabs to spawn
+    public GameObject BulletPrefab;
+    public GameObject JetPackParticlePrefab;
 
     //Control keys
     public string moveLeftKeyCode   =   "a";
     public string moveRightKeyCode  =   "d";
     public string jumpKeyCode       =   "w";
     public string fireKeyCode = "space";
+    public string jetpackKeyCode    =   "v";
 
     //private variables
     public delegate void PlayerEvent();
@@ -28,6 +35,10 @@ public class PlayerController : MonoBehaviour
     private List<EventConfig> _playerEvents = new List<EventConfig>();
     private Rigidbody2D _rb;
     private bool _isGrounded = false;
+    private float _endTimeFly = 0;
+    private GameObject _jetpackParticle = null;
+    private SpriteRenderer _sr;
+    private int _direction = 1;
 
 
     //Helper structures
@@ -69,6 +80,7 @@ public class PlayerController : MonoBehaviour
     {
         InitPlayerEvents();
         _rb = GetComponent<Rigidbody2D>();
+		_sr = GetComponent<SpriteRenderer>();
     }
     void Update()
     {
@@ -81,26 +93,29 @@ public class PlayerController : MonoBehaviour
             ApplyBraking();
         }
     }
-    
-    /*
+ 
     void OnCollisionEnter2D(Collision2D col)
     {
-        _isGrounded = true;
+        if(_jetpackParticle != null)
+        {
+            Destroy(_jetpackParticle);
+        }
     }
-    */
+    
 
     //Public functions
     public void InitPlayerEvents()
     {
         _playerEvents.Add(new EventConfig(MoveLeft, TypeEvent.Key, moveLeftKeyCode));
         _playerEvents.Add(new EventConfig(MoveRight, TypeEvent.Key, moveRightKeyCode));
-        
         _playerEvents.Add(new EventConfig(Abilities.BindableReason.JumpButtonPressed,
             TypeEvent.Down,
             jumpKeyCode));
         _playerEvents.Add(new EventConfig(Abilities.BindableReason.FireButtonPressed,
             TypeEvent.Down,
             fireKeyCode));
+        _playerEvents.Add(new EventConfig(Fly, TypeEvent.Key, jetpackKeyCode));
+        _playerEvents.Add(new EventConfig(StartFly, TypeEvent.Down, jetpackKeyCode));
     }
 
     //Private functions
@@ -149,7 +164,10 @@ public class PlayerController : MonoBehaviour
 
     public void Fire()
     {
-        Debug.Log("FIRE!!");
+        GameObject newBox = Instantiate(BulletPrefab);
+        newBox.transform.position = new Vector2(transform.position.x+1.5f * _direction, transform.position.y);
+        if(_direction == -1)
+            newBox.transform.Rotate(0, 0,180);
     }
 
     public void Jump()
@@ -161,14 +179,44 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    
+    public void StartFly()
+    {
+        if (_isGrounded)
+        {
+            _endTimeFly = Time.time + maxTimeFly;
+            _jetpackParticle = Instantiate(JetPackParticlePrefab);
+            _jetpackParticle.transform.parent = gameObject.transform;
+            _jetpackParticle.transform.position = new Vector2(transform.position.x, transform.position.y - 0.5f);
+        }
+    }
+
+
+    private void Fly()
+    {
+        if (Time.time < _endTimeFly)
+        {
+            if (_rb.velocity.magnitude > playerMoveMaxSpeed.magnitude)
+                _rb.velocity = _rb.velocity.normalized * playerMoveMaxSpeed;
+            else
+                _rb.AddForce(Vector2.up * Time.deltaTime * jetpackForce, ForceMode2D.Impulse);
+        }
+        else if (_jetpackParticle != null)
+        {
+            Destroy(_jetpackParticle);
+        }
+    }
+
     private void MoveLeft()
     {
+        _direction = -1;
+        _sr.flipX = false;
         VerticalMovement(Vector2.left);
     }
     
     private void MoveRight()
     {
+        _direction = 1;
+        _sr.flipX = true;
         VerticalMovement(Vector2.right);
     }
     
@@ -211,4 +259,5 @@ public class PlayerController : MonoBehaviour
 
         return false;
     }
+    
 }
