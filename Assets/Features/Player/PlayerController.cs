@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using UnityEditor.Rendering;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -10,6 +10,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask _layerMask;
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private FakeAnimationThatIWillUseInsteadOfUsingBuiltinUnityAnimator _anim;
+
+
+    private Vector2 localPosOfCamera;
+    [SerializeField] private Transform _cameraFollowTransform;
     
     //Player Parameters
     public float playerMoveSpeed    = 7f;
@@ -89,6 +93,8 @@ public class PlayerController : MonoBehaviour
     {
         InitPlayerEvents();
         _rb = GetComponent<Rigidbody2D>();
+
+        localPosOfCamera = this._cameraFollowTransform.localPosition;
     }
     
     //void Update()
@@ -131,6 +137,10 @@ public class PlayerController : MonoBehaviour
         {
             ApplyBraking();
         }
+        
+        _cameraFollowTransform.localPosition = new Vector2
+            (localPosOfCamera.x * _direction,
+            localPosOfCamera.y);
     }
  
     void OnCollisionEnter2D(Collision2D col)
