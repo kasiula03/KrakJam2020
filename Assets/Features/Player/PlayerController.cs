@@ -194,8 +194,12 @@ public class PlayerController : MonoBehaviour
     //Private functions
     private void PlayerMovement()
     {
-        if(left) MoveLeft();
-        if(right) MoveRight();
+        if(left)
+            Abilities.BindedActions[_playerAbilitiesLogic.GetProperty(Abilities.BindableReason.LeftMovement).Value].Invoke(this);
+            
+        if(right)
+            Abilities.BindedActions[_playerAbilitiesLogic.GetProperty(Abilities.BindableReason.RightMovement).Value].Invoke(this);
+        
         collectionHasBeenChanged = false;
         foreach (var playerEvent in _playerEvents)
         {
@@ -331,14 +335,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void MoveLeft()
+    public void MoveLeft()
     {
         _direction = -1;
         _spriteRenderer.flipX = true;
         VerticalMovement(Vector2.left);
     }
     
-    private void MoveRight()
+    public void MoveRight()
     {
         _direction = 1;
         _spriteRenderer.flipX = false;

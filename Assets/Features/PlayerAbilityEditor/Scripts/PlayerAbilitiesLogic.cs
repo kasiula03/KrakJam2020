@@ -53,6 +53,9 @@ public class PlayerAbilitiesLogic : IInitializable, IDisposable
             AddEmpty(key);
         }
         
+        this.OnEventPerformActionDictionary[Abilities.BindableReason.LeftMovement].Value = Abilities.BindableReaction.MoveLeft;
+        this.OnEventPerformActionDictionary[Abilities.BindableReason.RightMovement].Value = Abilities.BindableReaction.MoveLeft;
+        
         void AddEmpty(Abilities.BindableReason key)
         {
             OnEventPerformActionDictionary.Add(key, new ReactiveProperty<Abilities.BindableReaction>(Abilities.BindableReaction.Null));
