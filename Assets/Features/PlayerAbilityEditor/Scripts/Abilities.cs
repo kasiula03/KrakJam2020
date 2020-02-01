@@ -9,6 +9,7 @@ public class Abilities
         JumpButtonPressed,
         FireButtonPressed,
         JetpackButtonPressed,
+        LockWheelButtonPressed,
     }
     
     public enum BindableReaction
@@ -17,6 +18,7 @@ public class Abilities
         Fire,
         Vomit,
         Jetpack,
+        Lock,
         Null
     }
 
@@ -26,9 +28,15 @@ public class Abilities
             { BindableReaction.Jump, ExecuteJump },
             { BindableReaction.Fire, ExecuteFire },
             { BindableReaction.Jetpack, ExecuteJetpack },
+            { BindableReaction.Lock, ExecuteLock },
             { BindableReaction.Null, _ => { }},
             { BindableReaction.Vomit, _ => { }}
         };
+
+    public static void ExecuteLock(PlayerController player)
+    {
+        player.PerformSpecialAction();
+    }
 
     public static void ExecuteFire(PlayerController player)
     {
