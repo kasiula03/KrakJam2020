@@ -17,7 +17,9 @@ public class PlayerController : MonoBehaviour
     public float jumpForce          = 5f;
     public float jetpackForce       = 15f;
     public float maxTimeFly = 2f;
-    
+
+    public PlayerHealth PlayerHealth;
+
     //Prefabs to spawn
     public GameObject BulletPrefab;
     public GameObject JetPackParticlePrefab;
@@ -93,15 +95,27 @@ public class PlayerController : MonoBehaviour
             ApplyBraking();
         }
     }
-
+ 
     void OnCollisionEnter2D(Collision2D col)
     {
         if(_jetpackParticle != null)
         {
             Destroy(_jetpackParticle);
         }
+
+
+        if (col.collider.gameObject.tag == "healthPoint")
+        {
+            AddHealth(1);
+            Destroy(col.gameObject);
+        }
+        else if (col.collider.gameObject.tag == "asteroid")
+        {
+            SubHealth(1);
+            Destroy(col.gameObject);
+        }
     }
-    
+
 
     //Public functions
     public void InitPlayerEvents()
@@ -179,7 +193,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void StartFly()
+    public void SubHealth (int damage)
+    {
+        PlayerHealth.SubHealth(damage);
+        if (PlayerHealth.CurrentHealthy <= 0)
+            Destroy(gameObject);
+    }
+    public void AddHealth(int additionalHealth)
+    {
+        PlayerHealth.AddHealth(additionalHealth);
+    }
+
+
+    private void StartFly()
     {
         if (_isGrounded)
         {
@@ -189,8 +215,6 @@ public class PlayerController : MonoBehaviour
             _jetpackParticle.transform.position = new Vector2(transform.position.x, transform.position.y - 0.5f);
         }
     }
-
-
     private void Fly()
     {
         if (Time.time < _endTimeFly)

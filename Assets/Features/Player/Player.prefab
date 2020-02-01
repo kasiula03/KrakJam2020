@@ -73,6 +73,7 @@ GameObject:
   - component: {fileID: 6119828431039171683}
   - component: {fileID: 6119828431039171687}
   - component: {fileID: -6013780804537658156}
+  - component: {fileID: 1391629775}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -214,6 +215,7 @@ MonoBehaviour:
   jumpForce: 10
   jetpackForce: 15
   maxTimeFly: 2
+  PlayerHealth: {fileID: 1391629775}
   BulletPrefab: {fileID: 3538726684605360980, guid: de84993bde01e7f49a2706a95739e343,
     type: 3}
   JetPackParticlePrefab: {fileID: 7019095592853729841, guid: 7736b978e70083f409c2c00ed20065a1,
@@ -223,3 +225,23 @@ MonoBehaviour:
   jumpKeyCode: w
   fireKeyCode: space
   jetpackKeyCode: v
+--- !u!114 &1391629775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6119828431039171692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36d8430cbeff5fc489444ac11744a387, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealthy: 3
+  CurrentHealthy: 0
+  MarginBetweenIcons: 0.1
+  IconsPosition: {fileID: 0}
+  FullHealthIcon: {fileID: 3966126244546387543, guid: 98605da149e720140929345da7205552,
+    type: 3}
+  EmptyHealthIcon: {fileID: 7875337772317841176, guid: 9cd8cd94c9380aa489edd6e50922dad3,
+    type: 3}
