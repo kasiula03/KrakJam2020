@@ -253,7 +253,6 @@ GameObject:
   - component: {fileID: 5044178465310810780}
   - component: {fileID: 5044178465310810782}
   - component: {fileID: 5044178465310810781}
-  - component: {fileID: 5044178465310810783}
   m_Layer: 5
   m_Name: CodeCanvas
   m_TagString: Untagged
@@ -268,7 +267,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5044178465310810723}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -317,19 +316,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5044178465310810783
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5044178465310810723}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 179f52bc90f2f455b9f3606e64be2302, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Cheats: 
 --- !u!1 &5044178465486691509
 GameObject:
   m_ObjectHideFlags: 0
@@ -714,7 +700,8 @@ PrefabInstance:
       propertyPath: m_margin.x
       value: 12
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8955040215632312557, guid: e2e3fc61889424dd8b493a06a501f494, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e2e3fc61889424dd8b493a06a501f494, type: 3}
 --- !u!224 &9100202677999060799 stripped
 RectTransform:
