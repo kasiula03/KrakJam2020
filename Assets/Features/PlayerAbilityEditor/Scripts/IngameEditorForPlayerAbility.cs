@@ -20,8 +20,8 @@ public class IngameEditorForPlayerAbility : MonoBehaviour
 
     void Start()
     {
-        //_playerAbilities.UnlockAbility(Abilities.BindableReaction.Fire);
-        //_playerAbilities.UnlockAbility(Abilities.BindableReaction.Jump);
+        _playerAbilities.UnlockAbility(Abilities.BindableReaction.Fire);
+        _playerAbilities.UnlockAbility(Abilities.BindableReaction.Jump);
 
         _playerAbilities.UnlockedAbilitiesChanged += this.RefreshAbilities;
         _watchProperty = _playerAbilities.GetProperty(_targetKey);

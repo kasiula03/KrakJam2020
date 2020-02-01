@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     public JetpackFuel JetpackFuel;
 
     //Prefabs to spawn
-    public GameObject BulletPrefab;
+    public Bullet BulletPrefab;
     public GameObject JetPackParticlePrefab;
 
     //Control keys
@@ -178,19 +178,25 @@ public class PlayerController : MonoBehaviour
         _playerEvents.Add(new EventConfig(Abilities.BindableReason.FireButtonPressed,
             TypeEvent.Down,
             fireKeyCode));
-        _playerEvents.Add(new EventConfig(Fly, TypeEvent.Key, jetpackKeyCode));
-        _playerEvents.Add(new EventConfig(StartFly, TypeEvent.Down, jetpackKeyCode));
-        _playerEvents.Add(new EventConfig(StopFly, TypeEvent.Up, jetpackKeyCode));
+
+        _playerEvents.Add(new EventConfig(Abilities.BindableReason.JetpackButtonPressed,
+            TypeEvent.Down,
+            jetpackKeyCode));
+
+        //_playerEvents.Add(new EventConfig(Fly, TypeEvent.Key, jetpackKeyCode));
+        //_playerEvents.Add(new EventConfig(StopFly, TypeEvent.Up, jetpackKeyCode));
         _playerEvents.Add(new EventConfig(PerformSpecialAction, TypeEvent.Key, specialActionKeyCode));
 
     }
 
+    public string currentKeyPressed;
+    private bool collectionHasBeenChanged;
     //Private functions
     private void PlayerMovement()
     {
         if(left) MoveLeft();
         if(right) MoveRight();
-        
+        collectionHasBeenChanged = false;
         foreach (var playerEvent in _playerEvents)
         {
             switch (playerEvent.eventType)
@@ -198,6 +204,7 @@ public class PlayerController : MonoBehaviour
                 case TypeEvent.Down:
                     if (Input.GetKeyDown(playerEvent.keyCode))
                     {
+                        currentKeyPressed = playerEvent.keyCode;
                         playerEvent.eventFunction?.Invoke();
                         if (playerEvent.resolve)
                         {
@@ -209,6 +216,7 @@ public class PlayerController : MonoBehaviour
                 case TypeEvent.Key:
                     if (Input.GetKey(playerEvent.keyCode))
                     {
+                        currentKeyPressed = playerEvent.keyCode;
                         playerEvent.eventFunction?.Invoke();
                         if (playerEvent.resolve)
                         {
@@ -220,6 +228,7 @@ public class PlayerController : MonoBehaviour
                 case TypeEvent.Up:
                     if (Input.GetKeyUp(playerEvent.keyCode))
                     {
+                        currentKeyPressed = playerEvent.keyCode;
                         playerEvent.eventFunction?.Invoke();
                         if (playerEvent.resolve)
                         {
@@ -229,17 +238,20 @@ public class PlayerController : MonoBehaviour
                     }
                     break;
             }
+            if (collectionHasBeenChanged)
+                break;
         }
     }
 
     public void Fire()
     {
-        if(Time.time > lastFireTime+ reloadGunTime)
+        if (Time.time > lastFireTime + reloadGunTime)
         {
             GameObject newBox = Instantiate(BulletPrefab);
-            newBox.transform.position = new Vector2(transform.position.x+1.5f * _direction, transform.position.y);
-            if(_direction == -1)
-                newBox.transform.Rotate(0, 0,180);
+            newBox.transform.position = new Vector2(transform.position.x + 1.5f * _direction, transform.position.y);
+            newBox.Setup("Player", "Enemy", _direction, transform.position + Vector3.right * _direction);
+            if (_direction == -1)
+                newBox.transform.Rotate(0, 0, 180);
             lastFireTime = Time.time;
         }
     }
@@ -265,12 +277,21 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    private void StartFly()
+    public void StartFly(string jetpackKey)
     {
+        //Remove events old events if exist 
+        _playerEvents.RemoveAll(k => k.eventFunction == Fly);
+        _playerEvents.RemoveAll(k => k.eventFunction == StopFly);
+
         JetpackFuel.LaunchJetpack();
         _jetpackParticle = Instantiate(JetPackParticlePrefab);
         _jetpackParticle.transform.parent = gameObject.transform;
         _jetpackParticle.transform.position = new Vector2(transform.position.x, transform.position.y - 0.5f);
+
+        //Add events for new key
+        _playerEvents.Add(new EventConfig(Fly, TypeEvent.Key, jetpackKey));
+        _playerEvents.Add(new EventConfig(StopFly, TypeEvent.Up, jetpackKey));
+        collectionHasBeenChanged = true;
     }
 
     private void StopFly()
@@ -299,7 +320,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Fly()
+    public void Fly()
     {
         if (JetpackFuel.IsFuel())
         {

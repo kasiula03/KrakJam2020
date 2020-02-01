@@ -36,19 +36,23 @@ public class JetpackFuel : MonoBehaviour
     }
     public bool IsFuel()
     {
-        fuel -= Time.deltaTime * fuelFireSpeed;
+        if (_isLaunched)
+        {
+            fuel -= Time.deltaTime * fuelFireSpeed;
 
-        if(fuel > 0)
-        {
-            var fuelPercetage = (int)((fuel / maxFuel) * 100);
-            UpdateFuelStatus(fuelPercetage);
-            return true;
+            if (fuel > 0)
+            {
+                var fuelPercetage = (int)((fuel / maxFuel) * 100);
+                UpdateFuelStatus(fuelPercetage);
+                return true;
+            }
+            else
+            {
+                fuel = 0;
+            }
+            UpdateFuelStatus(0);
         }
-        else
-        {
-            fuel = 0;
-        }
-        UpdateFuelStatus(0);
+
         return false;
     }
     private void UpdateFuelStatus(int percentage)

@@ -8,14 +8,19 @@ public class EnemyFlyMovement : MonoBehaviour
 {
     [SerializeField] private Vector3 _flyHeight;
     [SerializeField] private float _targetRange;
+    [SerializeField] private Bullet _bulletPrefab;
+    [SerializeField] private float _shootCooldown;
+    [SerializeField] private MovementAnimation _movementAnimation;
     //[SerializeField] private LayerMask _layerMask;
 
     private Transform _playerTarget;
     private Rigidbody2D _rb;
+    private float _nextFire;
 
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _movementAnimation.Animate();
     }
 
     public void Update()
@@ -31,13 +36,25 @@ public class EnemyFlyMovement : MonoBehaviour
         else
         {
             FlyToTarget();
-            Shot();
+            if (Time.time > _nextFire)
+            {
+                Shot();
+            }
         }
     }
 
     private void Shot()
     {
-
+        _nextFire = Time.time + _shootCooldown;
+        Bullet bullet = Instantiate(_bulletPrefab, transform.position, Quaternion.identity);
+     
+        Rigidbody2D rg = bullet.GetComponent<Rigidbody2D>();
+        Vector3 direction = bullet.transform.position - _playerTarget.position;
+        float dir = direction.normalized.x < 0 ? 1 : -1;
+        Debug.Log(dir);
+        bullet.Setup("Enemy", "Player", dir, _playerTarget.position);
+        // rg.AddForce(direction.normalized * Vector2.one);
+       // rg.velocity = dir * 3 * Vector2.one;
     }
 
     private void FindTarget()
@@ -62,7 +79,7 @@ public class EnemyFlyMovement : MonoBehaviour
         int direction = transform.position.x < _playerTarget.position.x ? 1 : -1;
         if (transform.position.y < _flyHeight.y)
         {
-            _rb.AddForce((Vector2.up + direction * Vector2.right) * Time.deltaTime * 10, ForceMode2D.Impulse);
+            _rb.AddForce((Vector2.up * 10 + (direction * Vector2.right)) * Time.deltaTime, ForceMode2D.Impulse);
         }
     }
 }
