@@ -251,6 +251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36d8430cbeff5fc489444ac11744a387, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnDieObject: {fileID: 0}
   MaxHealthy: 3
   CurrentHealthy: 0
   MarginBetweenIcons: 0.1
@@ -456,3 +457,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 83bd07329f45549059904a1fc1bf55a3, type: 3}
   - {fileID: 21300000, guid: 5877088b407304842983970b2467b1dd, type: 3}
   - {fileID: 21300000, guid: 83bd07329f45549059904a1fc1bf55a3, type: 3}
+  forShoot: {fileID: 21300000, guid: 7726f05215b394024ad3400c673a09e3, type: 3}
+  forDance:
+  - {fileID: 21300000, guid: b852ac449a51541d391887e44b3917e0, type: 3}
+  - {fileID: 21300000, guid: 013953d2ace764baba1522e009f81fee, type: 3}
