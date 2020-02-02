@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d050b12fbeed72641b1b52253accfb8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laserTime: 3
+  laserTime: 1
   LaserBullet: {fileID: 2410193558829416722, guid: de1aa94af9795464f93b3d4dbe0be77e,
     type: 3}
   laserSpeed: 2
