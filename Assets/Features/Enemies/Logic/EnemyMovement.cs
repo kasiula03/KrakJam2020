@@ -13,6 +13,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private string _targetTag;
     [SerializeField] private float _speed;
     [SerializeField] private bool _idleMovement;
+    [SerializeField] private float _distanceToActionOnplayer = 1f;
     private Transform _playerTarget;
     public Vector3 _target = Vector3.zero;
     public bool facingRight = true;
@@ -87,7 +88,7 @@ public class EnemyMovement : MonoBehaviour
             distance = Vector2.Distance(new Vector2(transform.position.x, 0), new Vector2(_playerTarget.position.x, 0));
         }
 
-        if(_playerTarget != null && _actionOnPlayer != null && distance < 1f)
+        if(_playerTarget != null && _actionOnPlayer != null && distance < _distanceToActionOnplayer)
         {
             //todo: action of player
             _actionOnPlayer.DoAction(_playerTarget.position);

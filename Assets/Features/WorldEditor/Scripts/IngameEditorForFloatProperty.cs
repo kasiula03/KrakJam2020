@@ -1,4 +1,5 @@
-﻿using UniRx;
+﻿using System;
+using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -29,6 +30,13 @@ public class IngameEditorForFloatProperty : MonoBehaviour
         _watchProperty = _worldLogic.GetPropertyFor(_property);
         _slider.value = _watchProperty.Value;
         _slider.onValueChanged.AddListener(PropagateValueToProperty);
+
+        if (_property == WorldEditorLogic.Properties.ColorBlue ||
+            _property == WorldEditorLogic.Properties.ColorRed ||
+            _property == WorldEditorLogic.Properties.ColorGreen)
+        {
+            WorldEditorLogic.ResetToWhite += PropagatePropertyToValue;
+        }
     }
 
     void OnDisable()
@@ -36,8 +44,18 @@ public class IngameEditorForFloatProperty : MonoBehaviour
         _slider.onValueChanged.RemoveListener(PropagateValueToProperty);
     }
 
+    void PropagatePropertyToValue()
+    {
+        _slider.value = _watchProperty?.Value ?? 1f;
+    }
+
     void PropagateValueToProperty(float f)
     {
         _watchProperty.Value = f;
+    }
+
+    private void OnDestroy()
+    {
+        WorldEditorLogic.ResetToWhite -= PropagatePropertyToValue;
     }
 }
