@@ -25,8 +25,8 @@ public class FakeAnimationThatIWillUseInsteadOfUsingBuiltinUnityAnimator : MonoB
     [SerializeField] private Sprite forShoot;
     [SerializeField] private Sprite[] forDance;
 
-    private float _shootWait;
-    private float _shootWaitSet;
+    [SerializeField] private float _shootWait;
+    [SerializeField] private float _shootWaitSet;
     
     private States CurrState { get; set; } = States.IDLE;
 
@@ -77,6 +77,13 @@ public class FakeAnimationThatIWillUseInsteadOfUsingBuiltinUnityAnimator : MonoB
         return forRun[Mathf.CeilToInt(Time.time*_spd) % forRun.Length];
     }
 
+    public void Shoot()
+    {
+        CurrState = States.SHOOT;
+        _shootWait = _shootWaitSet;
+        _renderer.sprite = GetShootSprite();
+    }
+    
     Sprite GetShootSprite()
     {
         _shootWait = _shootWaitSet;
