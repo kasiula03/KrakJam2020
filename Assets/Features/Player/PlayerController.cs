@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
     public string jetpackKeyCode    =   "v";
     public string specialActionKeyCode = "z";
     public string laserKeyCode = "e";
+    public string keyforRGB = "y";
 
 
     //private variables
@@ -204,6 +205,10 @@ public class PlayerController : MonoBehaviour
         _playerEvents.Add(new EventConfig(Abilities.BindableReason.LockWheelButtonPressed,
             TypeEvent.Down,
             specialActionKeyCode));
+        
+        _playerEvents.Add(new EventConfig(Abilities.BindableReason.ShowHideRGB,
+            TypeEvent.Down,
+            keyforRGB));
 
         //_playerEvents.Add(new EventConfig(Fly, TypeEvent.Key, jetpackKeyCode));
         //_playerEvents.Add(new EventConfig(StopFly, TypeEvent.Up, jetpackKeyCode));
@@ -279,7 +284,7 @@ public class PlayerController : MonoBehaviour
             if (_direction == -1)
                 newBox.transform.Rotate(0, 0, 180);
             lastFireTime = Time.time;
-            _anim.SetAnimationState(FakeAnimationThatIWillUseInsteadOfUsingBuiltinUnityAnimator.States.SHOOT);
+            _anim.Shoot();
         }
     }
 
@@ -298,7 +303,7 @@ public class PlayerController : MonoBehaviour
                 laser.transform.Rotate(0, 0, 180);
             laser.ChangeDirection(_direction);
             lastFireLaserTime = Time.time;
-            _anim.SetAnimationState(FakeAnimationThatIWillUseInsteadOfUsingBuiltinUnityAnimator.States.SHOOT);
+            _anim.Shoot();
         }
     }
 
@@ -361,6 +366,20 @@ public class PlayerController : MonoBehaviour
         if (_availableSpecialAction != null)
         {
             _availableSpecialAction.Perform();
+        }
+    }
+
+    [SerializeField] private CodeCanvas _selectRGBCanvas;
+    
+    public void ShowHideSelectRGB()
+    {
+        if (_selectRGBCanvas.IsShown)
+        {
+            _selectRGBCanvas.Hide();
+        }
+        else
+        {
+            _selectRGBCanvas.Show();
         }
     }
 

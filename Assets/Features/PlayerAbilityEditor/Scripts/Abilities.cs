@@ -13,7 +13,7 @@ public class Abilities
         LaserButtonPressed,
         LeftMovement,
         RightMovement,
-
+        ShowHideRGB
     }
     
     public enum BindableReaction
@@ -28,6 +28,7 @@ public class Abilities
         MoveRight,
         Lock,
         Null,
+        SelectRGB
     }
     
 
@@ -43,7 +44,13 @@ public class Abilities
             { BindableReaction.Vomit, _ => { }},
             { BindableReaction.MoveLeft, ExecuteMoveLeft},
             { BindableReaction.MoveRight, ExecuteMoveRight},
+            { BindableReaction.SelectRGB, ExecuteSelectRGB }
         };
+
+    public static void ExecuteSelectRGB(PlayerController player)
+    {
+        player.ShowHideSelectRGB();
+    }
 
     public static void ExecuteLock(PlayerController player)
     {
