@@ -7,6 +7,7 @@ public class ShowDialogAction : ActionOnPlayer
     [SerializeField] private string _text;
     [SerializeField] private string _speakerName;
     [SerializeField] private Vector3 _offset;
+    [SerializeField] private float _hideTime;
 
     [Inject(Id = "DialogCanvas")] private Canvas _mainCanvas;
 
@@ -21,6 +22,14 @@ public class ShowDialogAction : ActionOnPlayer
         }
     }
 
+    private void OnDestroy()
+    {
+        if (_dialogBox != null)
+        {
+            Destroy(_dialogBox.gameObject);
+        }
+    }
+
     public override void DoAction(Vector3 target)
     {
         if(_isOneTimeAction && executed)
@@ -31,10 +40,17 @@ public class ShowDialogAction : ActionOnPlayer
         _dialogBox.Initialize();
         _dialogBox.Show(_speakerName, _text);
         executed = true;
+        if(_hideTime > 0)
+        {
+            Invoke("HideWindow", _hideTime);
+        }
     }
 
     public void HideWindow()
     {
-        _dialogBox.Hide(() => { Destroy(_dialogBox.gameObject); });
+        _dialogBox.Hide(() => {
+            executed = false;
+            Destroy(_dialogBox.gameObject); 
+        });
     }
 }
