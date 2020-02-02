@@ -32,12 +32,11 @@ public class Bullet : MonoBehaviour
         _sourceTag = sourceTag;
         _enemyTag = enemyTag;
         _direction = direction;
-      //  transform.rotation.SetEulerAngles(new Vector3(0, 0, direction * 45));
     }
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.collider.gameObject.tag != _sourceTag)
+        if (col.collider.gameObject.tag != _sourceTag && col.collider.gameObject.layer != 10)
         {
             if (col.collider.gameObject.tag == _enemyTag)
             {

@@ -6,7 +6,7 @@ using Zenject;
 public class PlayerController : MonoBehaviour
 {
     [Inject] private readonly PlayerAbilitiesLogic _playerAbilitiesLogic;
-    [SerializeField] private Transform[] _checkOnGround;
+    [SerializeField] private Transform _checkOnGround;
     [SerializeField] private LayerMask _layerMask;
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private FakeAnimationThatIWillUseInsteadOfUsingBuiltinUnityAnimator _anim;
@@ -20,12 +20,9 @@ public class PlayerController : MonoBehaviour
     public Vector2 playerMoveMaxSpeed = new Vector2(3f, 5f);
     public float jumpForce          = 5f;
     public float reloadGunTime = 0.5f;
-    public float reloadLaserTime = 5f;
 
     public PlayerHealth PlayerHealth;
     public JetpackFuel JetpackFuel;
-    public DeathWindow DeathWindow;
-    public Laser LaserPrefab;
 
     //Prefabs to spawn
     public Bullet BulletPrefab;
@@ -38,8 +35,6 @@ public class PlayerController : MonoBehaviour
     public string fireKeyCode = "space";
     public string jetpackKeyCode    =   "v";
     public string specialActionKeyCode = "z";
-    public string laserKeyCode = "e";
-
 
     //private variables
     public delegate void PlayerEvent();
@@ -53,7 +48,6 @@ public class PlayerController : MonoBehaviour
     private int _direction = 1;
     private SpecialAction _availableSpecialAction;
     private float lastFireTime = -10;
-    private float lastFireLaserTime = -10;
 
     public Vector2 VerticalDirection
     {
@@ -112,25 +106,15 @@ public class PlayerController : MonoBehaviour
             return FakeAnimationThatIWillUseInsteadOfUsingBuiltinUnityAnimator.States.JUMP_1;
         }
 
-        if (PlayerHealth.CurrentHealthy <= 0)
-        {
-            if (!isDeadState)
-            {
-                DeathWindow.enabled = true;
-                DeathWindow.InitWindow();
-            }
-            isDeadState = true;
-            return FakeAnimationThatIWillUseInsteadOfUsingBuiltinUnityAnimator.States.DEAD;
-        }
         if (left || right)
         {
             return FakeAnimationThatIWillUseInsteadOfUsingBuiltinUnityAnimator.States.RUN;
         }
 
         return FakeAnimationThatIWillUseInsteadOfUsingBuiltinUnityAnimator.States.IDLE;
+        
     }
 
-    private bool isDeadState = false;
     private bool left = false;
     private bool right = false;
 
@@ -147,14 +131,11 @@ public class PlayerController : MonoBehaviour
         
         _anim.SetAnimationState(CalculateState());
         
-        if (!isDeadState)
+        bool movementThisFrame = false;
+        PlayerMovement();
+        if (movementThisFrame == false)
         {
-            bool movementThisFrame = false;
-            PlayerMovement();
-            if (movementThisFrame == false)
-            {
-                ApplyBraking();
-            }
+            ApplyBraking();
         }
         
         _cameraFollowTransform.localPosition = new Vector2
@@ -179,7 +160,10 @@ public class PlayerController : MonoBehaviour
             SubHealth(1);
             Destroy(col.gameObject);
         }
-        
+        else if (col.gameObject.tag == "Enemy")
+        {
+            SubHealth(1);
+        }
     }
 
 
@@ -194,20 +178,14 @@ public class PlayerController : MonoBehaviour
         _playerEvents.Add(new EventConfig(Abilities.BindableReason.FireButtonPressed,
             TypeEvent.Down,
             fireKeyCode));
-        _playerEvents.Add(new EventConfig(Abilities.BindableReason.LaserButtonPressed,
-            TypeEvent.Down,
-            laserKeyCode));
+
         _playerEvents.Add(new EventConfig(Abilities.BindableReason.JetpackButtonPressed,
             TypeEvent.Down,
             jetpackKeyCode));
 
-        _playerEvents.Add(new EventConfig(Abilities.BindableReason.LockWheelButtonPressed,
-            TypeEvent.Down,
-            specialActionKeyCode));
-
         //_playerEvents.Add(new EventConfig(Fly, TypeEvent.Key, jetpackKeyCode));
         //_playerEvents.Add(new EventConfig(StopFly, TypeEvent.Up, jetpackKeyCode));
-        //_playerEvents.Add(new EventConfig(PerformSpecialAction, TypeEvent.Key, specialActionKeyCode));
+        _playerEvents.Add(new EventConfig(PerformSpecialAction, TypeEvent.Key, specialActionKeyCode));
 
     }
 
@@ -279,26 +257,6 @@ public class PlayerController : MonoBehaviour
             if (_direction == -1)
                 newBox.transform.Rotate(0, 0, 180);
             lastFireTime = Time.time;
-            _anim.SetAnimationState(FakeAnimationThatIWillUseInsteadOfUsingBuiltinUnityAnimator.States.SHOOT);
-        }
-    }
-
-    private Laser laser;
-    public void Laser()
-    {
-        if (Time.time > lastFireLaserTime + reloadLaserTime)
-        {
-            laser = Instantiate(LaserPrefab);
-
-            laser.transform.position = new Vector2(transform.position.x + 1.5f * _direction, transform.position.y);
-            laser.transform.parent = gameObject.transform;
-            laser.Setup("Player", "Enemy", _direction);
-
-            if (_direction == -1)
-                laser.transform.Rotate(0, 0, 180);
-            laser.ChangeDirection(_direction);
-            lastFireLaserTime = Time.time;
-            _anim.SetAnimationState(FakeAnimationThatIWillUseInsteadOfUsingBuiltinUnityAnimator.States.SHOOT);
         }
     }
 
@@ -314,6 +272,8 @@ public class PlayerController : MonoBehaviour
     public void SubHealth (int damage)
     {
         PlayerHealth.SubHealth(damage);
+        if (PlayerHealth.CurrentHealthy <= 0)
+            Destroy(gameObject);
     }
     public void AddHealth(int additionalHealth)
     {
@@ -388,22 +348,9 @@ public class PlayerController : MonoBehaviour
         _spriteRenderer.flipX = false;
         VerticalMovement(Vector2.right);
     }
-
-    public void Dance()
-    {
-        _anim.SetAnimationState(FakeAnimationThatIWillUseInsteadOfUsingBuiltinUnityAnimator.States.DANCE);
-    }
     
     private void VerticalMovement(Vector2 direction)
     {
-        if(laser != null)
-        {
-            laser.transform.position = new Vector2(transform.position.x + 1.5f * _direction, transform.position.y);
-            laser.ChangeDirection(_direction);
-
-        }
-
-
         if (_isGrounded)
         {
             _rb.velocity += (direction * playerMoveSpeed * Time.deltaTime);
@@ -432,8 +379,7 @@ public class PlayerController : MonoBehaviour
 
     private bool CalculateIsGrounded()
     {
-        for(int i = 0; i < _checkOnGround.Length; i++)
-        if(Physics2D.Linecast(this.transform.position, _checkOnGround[i].position, _layerMask))
+        if(Physics2D.Linecast(this.transform.position, _checkOnGround.position, _layerMask))
         {
             return true;
         }

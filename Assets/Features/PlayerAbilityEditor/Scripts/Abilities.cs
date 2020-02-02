@@ -10,6 +10,7 @@ public class Abilities
         FireButtonPressed,
         JetpackButtonPressed,
         LockWheelButtonPressed,
+        LaserButtonPressed,
         LeftMovement,
         RightMovement,
 
@@ -21,6 +22,7 @@ public class Abilities
         Fire,
         Vomit,
         Jetpack,
+        Laser,
 
         MoveLeft,
         MoveRight,
@@ -37,6 +39,7 @@ public class Abilities
             { BindableReaction.Jetpack, ExecuteJetpack },
             { BindableReaction.Lock, ExecuteLock },
             { BindableReaction.Null, ExecuteDance },
+            { BindableReaction.Laser, ExecuteLaser },
             { BindableReaction.Vomit, _ => { }},
             { BindableReaction.MoveLeft, ExecuteMoveLeft},
             { BindableReaction.MoveRight, ExecuteMoveRight},
@@ -56,6 +59,11 @@ public class Abilities
     {
         player.Fire();
     }
+    public static void ExecuteLaser(PlayerController player)
+    {
+        player.Laser();
+    }
+
 
     public static void ExecuteMoveLeft(PlayerController player)
     {
