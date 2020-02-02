@@ -75,6 +75,7 @@ GameObject:
   - component: {fileID: 8636957305446422141}
   - component: {fileID: 6581554354297476966}
   - component: {fileID: 2988169203560025333}
+  - component: {fileID: 2112643177207600773}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -139,7 +140,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 32767
+  m_SortingOrder: 11
   m_Sprite: {fileID: 21300000, guid: 83bd07329f45549059904a1fc1bf55a3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -226,7 +227,7 @@ MonoBehaviour:
   reloadGunTime: 0.5
   PlayerHealth: {fileID: 6581554354297476966}
   JetpackFuel: {fileID: 2988169203560025333}
-  DeathWindow: {fileID: 0}
+  DeathWindow: {fileID: 2112643177207600773}
   BulletPrefab: {fileID: 2168595441457339279, guid: de84993bde01e7f49a2706a95739e343,
     type: 3}
   JetPackParticlePrefab: {fileID: 7019095592853729841, guid: 7736b978e70083f409c2c00ed20065a1,
@@ -276,6 +277,18 @@ MonoBehaviour:
   fuelFireSpeed: 50
   fuelGenerationSpeed: 30
   fuelStatusUI: {fileID: 0}
+--- !u!114 &2112643177207600773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1133674933554777797}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4593ccffbb6706847a90f0160c5ca142, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6581554354523055041
 GameObject:
   m_ObjectHideFlags: 0
