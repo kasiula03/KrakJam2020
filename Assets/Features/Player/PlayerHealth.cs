@@ -28,10 +28,12 @@ public class PlayerHealth : MonoBehaviour
 
     public void SubHealth (int damage)
     {
-        var damageObj = Instantiate(Damage);
-        damageObj.transform.parent = gameObject.transform;
-        damageObj.transform.position = new Vector2(transform.position.x, transform.position.y);
-
+        if(Damage != null)
+        {
+            var damageObj = Instantiate(Damage);
+            damageObj.transform.parent = gameObject.transform;
+            damageObj.transform.position = new Vector2(transform.position.x, transform.position.y);
+        }
 
         CurrentHealthy -= damage;
         CurrentHealthy = Mathf.Max(0, CurrentHealthy);
