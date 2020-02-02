@@ -16,6 +16,11 @@ public class EnemyKillingCondition : MonoBehaviour
 
     public bool IsKillable()
     {
+        if (!targetInRange && !blocked && ! facingRight && !blind)
+        {
+            return true;
+        }
+
         return _properties.targetInRange == targetInRange && _properties.facingRight == facingRight && _properties.isBlocked == blocked;
     }
 }

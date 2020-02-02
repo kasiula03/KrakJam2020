@@ -15,7 +15,8 @@ public class WorldEditorLogic : IDisposable, IInitializable
 
     public ReadOnlyReactiveProperty<Color> ColorResult { get; private set; }
     public ReadOnlyReactiveProperty<float> GravityResult { get; private set; }
-    
+
+    public static event Action ResetToWhite;
     
 
     readonly FloatReactiveProperty Gravity = new FloatReactiveProperty(9f);
@@ -44,6 +45,16 @@ public class WorldEditorLogic : IDisposable, IInitializable
 
     private Color CalculateColor(float red, float green, float blue)
     {
+        if (red < .2f && green < .2f && blue < .2f)
+        {
+            ColorRed.Value = 1f;
+            ColorBlue.Value = 1f;
+            ColorGreen.Value = 1f;
+            
+            ResetToWhite?.Invoke();
+            return Color.white;
+        }
+        
         return new Color(red, green, blue, 1);
     }
 
