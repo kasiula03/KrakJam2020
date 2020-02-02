@@ -259,7 +259,6 @@ GameObject:
   - component: {fileID: 4512069512906154258}
   - component: {fileID: 8466948016264390972}
   - component: {fileID: 4513453520819249354}
-  - component: {fileID: 6157669227107302944}
   m_Layer: 0
   m_Name: Yakuza Drone
   m_TagString: Enemy
@@ -382,7 +381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36d8430cbeff5fc489444ac11744a387, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnDieObject: {fileID: 6157669227107302944}
+  OnDieObject: {fileID: 0}
   _damageAnimation: {fileID: 0}
   MaxHealthy: 1
   CurrentHealthy: 1
@@ -422,19 +421,6 @@ MonoBehaviour:
   targetInRange: 0
   facingRight: 0
   blinded: 0
---- !u!114 &6157669227107302944
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5208701096022919836}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 855f84769a2c8044888858e7482c4287, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _explosion: {fileID: 8578284421907940580}
 --- !u!1 &5208701096167393857
 GameObject:
   m_ObjectHideFlags: 0
@@ -869,12 +855,6 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 114000010855717226, guid: 53d301af6d66cf94497e9fcec3cb6699, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 53d301af6d66cf94497e9fcec3cb6699, type: 3}
---- !u!1 &8578284421907940580 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100000, guid: 53d301af6d66cf94497e9fcec3cb6699,
-    type: 3}
-  m_PrefabInstance: {fileID: 8578284421907907140}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8578284421907519684 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 53d301af6d66cf94497e9fcec3cb6699,

@@ -39,10 +39,6 @@ public class LaserBullet : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.collider.gameObject.tag != "Player" && col.collider.gameObject.layer != 10)//layer - bullet
-        {
-            return;
-        }
         if (col.collider.gameObject.tag != _sourceTag)
         {
             if (col.collider.gameObject.tag == _enemyTag)

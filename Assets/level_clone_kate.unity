@@ -4421,6 +4421,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Yakuza Drone
       objectReference: {fileID: 0}
+    - target: {fileID: 5208701096022919836, guid: c096f7e0db1eec04a9ff9bde6a637fd0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5208701096022919838, guid: c096f7e0db1eec04a9ff9bde6a637fd0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6499,6 +6504,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Yakuza Drone (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5208701096022919836, guid: c096f7e0db1eec04a9ff9bde6a637fd0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5208701096022919838, guid: c096f7e0db1eec04a9ff9bde6a637fd0,
         type: 3}
@@ -29991,11 +30001,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: God the Zilla
       objectReference: {fileID: 0}
-    - target: {fileID: 2069478985210130324, guid: 99b5d834fc44cf84498fa13a85cf7fab,
-        type: 3}
-      propertyPath: _windowTime
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 2069478985210130326, guid: 99b5d834fc44cf84498fa13a85cf7fab,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -30009,7 +30014,7 @@ PrefabInstance:
     - target: {fileID: 2069478985210130326, guid: 99b5d834fc44cf84498fa13a85cf7fab,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.8310547
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2069478985210130326, guid: 99b5d834fc44cf84498fa13a85cf7fab,
         type: 3}
@@ -30050,6 +30055,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7719273758198320818, guid: 99b5d834fc44cf84498fa13a85cf7fab,
+        type: 3}
+      propertyPath: _shootCooldown
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99b5d834fc44cf84498fa13a85cf7fab, type: 3}
