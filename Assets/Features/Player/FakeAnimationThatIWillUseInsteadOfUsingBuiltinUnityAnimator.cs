@@ -11,6 +11,7 @@ public class FakeAnimationThatIWillUseInsteadOfUsingBuiltinUnityAnimator : MonoB
         JUMP_3,
         DEAD,
         SHOOT,
+        DANCE
     }
 
     [SerializeField] private SpriteRenderer _renderer;
@@ -22,6 +23,7 @@ public class FakeAnimationThatIWillUseInsteadOfUsingBuiltinUnityAnimator : MonoB
     [SerializeField] private Sprite[] forJump;
     [SerializeField] private Sprite[] forRun;
     [SerializeField] private Sprite forShoot;
+    [SerializeField] private Sprite[] forDance;
 
     private float _shootWait;
     private float _shootWaitSet;
@@ -30,6 +32,11 @@ public class FakeAnimationThatIWillUseInsteadOfUsingBuiltinUnityAnimator : MonoB
 
     public void SetAnimationState(States state)
     {
+        if (state == States.IDLE && CurrState == States.DANCE)
+        {
+            return;
+            
+        }
         CurrState = state;
     }
 
@@ -40,6 +47,9 @@ public class FakeAnimationThatIWillUseInsteadOfUsingBuiltinUnityAnimator : MonoB
         {
             return;
         }
+
+        if (CurrState == States.SHOOT)
+            CurrState = States.IDLE;
         
         switch (CurrState)
         {
@@ -57,6 +67,8 @@ public class FakeAnimationThatIWillUseInsteadOfUsingBuiltinUnityAnimator : MonoB
                 return;
             case States.SHOOT : _renderer.sprite = GetShootSprite();
                 return;
+            case States.DANCE : _renderer.sprite = GetForDance();
+                return;
         }
     }
 
@@ -69,5 +81,10 @@ public class FakeAnimationThatIWillUseInsteadOfUsingBuiltinUnityAnimator : MonoB
     {
         _shootWait = _shootWaitSet;
         return forShoot;
+    }
+
+    Sprite GetForDance()
+    {
+        return forDance[Mathf.CeilToInt(Time.time*_spd) % forDance.Length];
     }
 }

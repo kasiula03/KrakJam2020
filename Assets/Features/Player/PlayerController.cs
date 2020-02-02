@@ -362,6 +362,11 @@ public class PlayerController : MonoBehaviour
         _spriteRenderer.flipX = false;
         VerticalMovement(Vector2.right);
     }
+
+    public void Dance()
+    {
+        _anim.SetAnimationState(FakeAnimationThatIWillUseInsteadOfUsingBuiltinUnityAnimator.States.DANCE);
+    }
     
     private void VerticalMovement(Vector2 direction)
     {
