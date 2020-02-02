@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2069478985210130325}
   - component: {fileID: 2069478985210130331}
   - component: {fileID: 2069478985210130328}
+  - component: {fileID: 7795140823863776672}
   - component: {fileID: 2069478985210130329}
   - component: {fileID: 2069478985210130330}
   m_Layer: 0
@@ -181,12 +182,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnDieObject: {fileID: 0}
+  _damageAnimation: {fileID: 7795140823863776672}
   MaxHealthy: 3
   CurrentHealthy: 3
   MarginBetweenIcons: 0.1
   IconsPosition: {fileID: 0}
   FullHealthIcon: {fileID: 0}
   EmptyHealthIcon: {fileID: 0}
+--- !u!114 &7795140823863776672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2069478985210130321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 836eba281b263be4dac9e27003093437, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spriteRenderer: {fileID: 2069478985210130327}
+  _damageColor: {r: 0.25490198, g: 0.25490198, b: 0.25490198, a: 0.64705884}
 --- !u!114 &2069478985210130329
 MonoBehaviour:
   m_ObjectHideFlags: 0
