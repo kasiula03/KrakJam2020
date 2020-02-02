@@ -283,6 +283,7 @@ MonoBehaviour:
   IconsPosition: {fileID: 0}
   FullHealthIcon: {fileID: 0}
   EmptyHealthIcon: {fileID: 0}
+  Damage: {fileID: -7027257175790173229, guid: 8465d2899c68ba145bd6d81bc8f0092c, type: 3}
 --- !u!114 &9198046371190869863
 MonoBehaviour:
   m_ObjectHideFlags: 0
