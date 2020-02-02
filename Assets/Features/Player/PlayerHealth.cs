@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
+    [SerializeField] private DieAnimation OnDieObject;
+
     public int MaxHealthy = 3;
     public int CurrentHealthy;
     public float MarginBetweenIcons = 0.1f;
@@ -28,7 +30,15 @@ public class PlayerHealth : MonoBehaviour
         CurrentHealthy = Mathf.Max(0, CurrentHealthy);
         if (CurrentHealthy <= 0)
         {
-            Destroy(gameObject);
+            if (OnDieObject != null)
+            {
+                StartCoroutine(OnDieObject.Execute(() => { Destroy(gameObject); }));
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+           
         }
 
         RenderIcons();
