@@ -29,7 +29,7 @@ public class PlayerHealth : MonoBehaviour
         CurrentHealthy -= damage;
         CurrentHealthy = Mathf.Max(0, CurrentHealthy);
 
-        if (CurrentHealthy <= 0)
+        if (CurrentHealthy <= 0 && gameObject.tag != "Player")
         {
             if (OnDieObject != null)
             {
