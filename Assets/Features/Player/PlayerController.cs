@@ -338,6 +338,20 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    [SerializeField] private CodeCanvas _selectRGBCanvas;
+    
+    public void ShowHideSelectRGB()
+    {
+        if (_selectRGBCanvas.IsShown)
+        {
+            _selectRGBCanvas.Hide();
+        }
+        else
+        {
+            _selectRGBCanvas.Show();
+        }
+    }
+
     public void Fly()
     {
         if (JetpackFuel.IsFuel())
