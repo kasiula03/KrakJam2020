@@ -25,11 +25,7 @@ public class PlayerHealth : MonoBehaviour
     public void SubHealth (int damage)
     {
         CurrentHealthy -= damage;
-        if (CurrentHealthy < 0)
-        {
-            CurrentHealthy = 0;
-            Destroy(gameObject);
-        }
+        CurrentHealthy = Mathf.Max(0, CurrentHealthy);
 
         RenderIcons();
     }
