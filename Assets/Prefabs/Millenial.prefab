@@ -168,7 +168,7 @@ MonoBehaviour:
   _isOneTimeAction: 1
   _dialogTextBoxPrefab: {fileID: 6771305292704220385, guid: 86c4b946082762646bdf24bbbcef8a5a,
     type: 3}
-  _text: Priviledged white, straight male!
+  _text: Priviledged scum!
   _speakerName: Millenial
   _offset: {x: 0, y: 5, z: 0}
   _hideTime: 0
@@ -283,6 +283,7 @@ MonoBehaviour:
   IconsPosition: {fileID: 0}
   FullHealthIcon: {fileID: 0}
   EmptyHealthIcon: {fileID: 0}
+  Damage: {fileID: 0}
 --- !u!114 &9198046371190869863
 MonoBehaviour:
   m_ObjectHideFlags: 0
