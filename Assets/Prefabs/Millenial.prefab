@@ -167,7 +167,7 @@ MonoBehaviour:
   _isOneTimeAction: 1
   _dialogTextBoxPrefab: {fileID: 6771305292704220385, guid: 86c4b946082762646bdf24bbbcef8a5a,
     type: 3}
-  _text: Lazy white, straight man!
+  _text: Priviledged white, straight male!
   _speakerName: Millenial
   _offset: {x: 0, y: 5, z: 0}
   _hideTime: 0
@@ -186,8 +186,8 @@ MonoBehaviour:
   _isOneTimeAction: 1
   _dialogTextBoxPrefab: {fileID: 6771305292704220385, guid: 86c4b946082762646bdf24bbbcef8a5a,
     type: 3}
-  _text: DDddd
-  _speakerName: Millenial
+  _text: Millenial
+  _speakerName: Ok, Boomer!
   _offset: {x: 0, y: 5, z: 0}
   _hideTime: 0
 --- !u!114 &1792461560
