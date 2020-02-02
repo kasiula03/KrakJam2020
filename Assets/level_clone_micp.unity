@@ -4036,6 +4036,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1670560772}
     m_Modifications:
+    - target: {fileID: 3353490815496287395, guid: ffa3a3c2ed9014614b7bbd680c3242a2,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3353490815496287395, guid: ffa3a3c2ed9014614b7bbd680c3242a2,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3353490815496287395, guid: ffa3a3c2ed9014614b7bbd680c3242a2,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3353490815595503995, guid: ffa3a3c2ed9014614b7bbd680c3242a2,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3353490815595503995, guid: ffa3a3c2ed9014614b7bbd680c3242a2,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3353490815595503995, guid: ffa3a3c2ed9014614b7bbd680c3242a2,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.b
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3353490815808592200, guid: ffa3a3c2ed9014614b7bbd680c3242a2,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -4044,6 +4074,21 @@ PrefabInstance:
     - target: {fileID: 3353490816173447366, guid: ffa3a3c2ed9014614b7bbd680c3242a2,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3353490816422681856, guid: ffa3a3c2ed9014614b7bbd680c3242a2,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3353490816422681856, guid: ffa3a3c2ed9014614b7bbd680c3242a2,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3353490816422681856, guid: ffa3a3c2ed9014614b7bbd680c3242a2,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.b
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3353490816935912637, guid: ffa3a3c2ed9014614b7bbd680c3242a2,
@@ -4066,41 +4111,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5106162111902711378, guid: ffa3a3c2ed9014614b7bbd680c3242a2,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5106162111902711378, guid: ffa3a3c2ed9014614b7bbd680c3242a2,
-        type: 3}
-      propertyPath: m_textInfo.spaceCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5106162111902711378, guid: ffa3a3c2ed9014614b7bbd680c3242a2,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5106162111902711378, guid: ffa3a3c2ed9014614b7bbd680c3242a2,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5106162111902711378, guid: ffa3a3c2ed9014614b7bbd680c3242a2,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5106162111928471792, guid: ffa3a3c2ed9014614b7bbd680c3242a2,
         type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1242943277}
-    - target: {fileID: 5106162111928471792, guid: ffa3a3c2ed9014614b7bbd680c3242a2,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 5106162111928471793, guid: ffa3a3c2ed9014614b7bbd680c3242a2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4210,31 +4225,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CanvasWorldColorEditor
-      objectReference: {fileID: 0}
-    - target: {fileID: 5106162112726264453, guid: ffa3a3c2ed9014614b7bbd680c3242a2,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5106162112726264453, guid: ffa3a3c2ed9014614b7bbd680c3242a2,
-        type: 3}
-      propertyPath: m_textInfo.spaceCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5106162112726264453, guid: ffa3a3c2ed9014614b7bbd680c3242a2,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5106162112726264453, guid: ffa3a3c2ed9014614b7bbd680c3242a2,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5106162112726264453, guid: ffa3a3c2ed9014614b7bbd680c3242a2,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffa3a3c2ed9014614b7bbd680c3242a2, type: 3}
@@ -6742,26 +6732,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1494933539}
   m_CullTransparentMesh: 0
---- !u!1 &1547883925 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5106162111928471797, guid: ffa3a3c2ed9014614b7bbd680c3242a2,
+--- !u!114 &1547883926 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1547883926, guid: ffa3a3c2ed9014614b7bbd680c3242a2,
     type: 3}
   m_PrefabInstance: {fileID: 686127219}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1547883926
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1547883925}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 179f52bc90f2f455b9f3606e64be2302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cheats: 
-  _initialScale: 0
 --- !u!224 &1547883929 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5106162111928471793, guid: ffa3a3c2ed9014614b7bbd680c3242a2,

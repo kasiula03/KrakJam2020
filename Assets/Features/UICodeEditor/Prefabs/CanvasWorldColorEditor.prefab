@@ -180,6 +180,7 @@ GameObject:
   - component: {fileID: 5106162111928471792}
   - component: {fileID: 5106162111928471799}
   - component: {fileID: 5106162111928471798}
+  - component: {fileID: 1547883926}
   m_Layer: 5
   m_Name: CanvasWorldColorEditor
   m_TagString: Untagged
@@ -226,7 +227,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!114 &5106162111928471799
 MonoBehaviour:
@@ -267,6 +268,20 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &1547883926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5106162111928471797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 179f52bc90f2f455b9f3606e64be2302, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Cheats: 
+  _initialScale: 0
 --- !u!1 &5106162112726264475
 GameObject:
   m_ObjectHideFlags: 0
