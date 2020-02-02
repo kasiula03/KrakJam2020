@@ -11,13 +11,14 @@ public class CodeCanvas : MonoBehaviour
 
     public bool IsShown { get; private set; } = false;
     public float _initialScale;
+    public bool _autoHide = false;
 
     void Awake()
     {
         _initialScale = this.transform.localScale.x;
         
         transform.localScale = Vector3.zero;
-        
+
     }
     
     public Tween Show()
@@ -37,4 +38,6 @@ public class CodeCanvas : MonoBehaviour
         IsShown = false;
         return DOTween.Sequence().Append(transform.DOScale(Vector3.zero, Time).SetEase(Ease.InCirc)).Play();
     }
+
+    
 }
