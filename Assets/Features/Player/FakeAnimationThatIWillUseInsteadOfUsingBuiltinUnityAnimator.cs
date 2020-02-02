@@ -92,6 +92,6 @@ public class FakeAnimationThatIWillUseInsteadOfUsingBuiltinUnityAnimator : MonoB
 
     Sprite GetForDance()
     {
-        return forDance[Mathf.CeilToInt(Time.time*_spd) % forDance.Length];
+        return forDance[Mathf.CeilToInt(Time.time*_spd*.45f) % forDance.Length];
     }
 }
