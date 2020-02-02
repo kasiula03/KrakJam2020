@@ -57,11 +57,13 @@ public class GodzillaAttack : MonoBehaviour
     {
         LaserBullet bullet = Instantiate(_bulletPrefab, transform.position, Quaternion.identity);
 
+
         Rigidbody2D rg = bullet.GetComponent<Rigidbody2D>();
         Vector3 direction = bullet.transform.position - _playerTarget.position;
         float dir = direction.normalized.x < 0 ? 1 : -1;
         bullet.Setup("Enemy", "Player", dir, _playerTarget.position);
-         rg.AddForce(direction.normalized * Vector2.one);
+     
+        rg.AddForce(direction.normalized * Vector2.one);
         // rg.velocity = dir * 3 * Vector2.one;
     }
 
