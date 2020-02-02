@@ -6508,7 +6508,7 @@ PrefabInstance:
     - target: {fileID: 5208701096022919836, guid: c096f7e0db1eec04a9ff9bde6a637fd0,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5208701096022919838, guid: c096f7e0db1eec04a9ff9bde6a637fd0,
         type: 3}
@@ -30058,8 +30058,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7719273758198320818, guid: 99b5d834fc44cf84498fa13a85cf7fab,
         type: 3}
-      propertyPath: _targetRange
-      value: 40
+      propertyPath: _shootCooldown
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99b5d834fc44cf84498fa13a85cf7fab, type: 3}

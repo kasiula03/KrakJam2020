@@ -9,23 +9,41 @@ public class GodzillaAttack : MonoBehaviour
     [SerializeField] private LaserBullet _bulletPrefab;
     [SerializeField] private float _targetRange;
     [SerializeField] private float _shootCooldown;
+    [SerializeField] private int _bulletPerWave;
     // public Bullet LaserBullet;
 
     private Transform _playerTarget;
     private float nextAttack;
     private float _nextFire;
-
- 
-
+    private bool _block;
+    private int _bullet;
+    private int unlockTime = 10;
+    private float _nextWave;
     void Update()
     {
 
         if(_playerTarget != null)
         {
+            if(_block && Time.time > _nextWave)
+            {
+                _block = false;
+            }
+            if(_block)
+            {
+                return;
+            }
+
             if (Time.time > _nextFire)
             {
                 Shot();
+                _bullet++;
                 _nextFire = Time.time + _shootCooldown;
+            }
+            if(_bullet > 20)
+            {
+                _block = true;
+                _bullet = 0;
+                _nextWave = Time.time + unlockTime;
             }
         }
         else
