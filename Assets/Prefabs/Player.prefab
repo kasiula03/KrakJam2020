@@ -226,9 +226,12 @@ MonoBehaviour:
   playerMoveMaxSpeed: {x: 8.5, y: 30}
   jumpForce: 6.5
   reloadGunTime: 0.5
+  reloadLaserTime: 5
   PlayerHealth: {fileID: 6581554354297476966}
   JetpackFuel: {fileID: 2988169203560025333}
   DeathWindow: {fileID: 2112643177207600773}
+  LaserPrefab: {fileID: 8459422568809839848, guid: 4fe56a6d7c1693f43b66bde3d5ecd3d2,
+    type: 3}
   BulletPrefab: {fileID: 2168595441457339279, guid: de84993bde01e7f49a2706a95739e343,
     type: 3}
   JetPackParticlePrefab: {fileID: 7019095592853729841, guid: 7736b978e70083f409c2c00ed20065a1,
@@ -239,6 +242,7 @@ MonoBehaviour:
   fireKeyCode: space
   jetpackKeyCode: v
   specialActionKeyCode: z
+  laserKeyCode: e
   currentKeyPressed: 
   _selectRGBCanvas: {fileID: 542725898602040419}
 --- !u!114 &6581554354297476966
