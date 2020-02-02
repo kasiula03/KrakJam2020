@@ -174,10 +174,7 @@ public class PlayerController : MonoBehaviour
             SubHealth(1);
             Destroy(col.gameObject);
         }
-        else if (col.gameObject.tag == "Enemy")
-        {
-            SubHealth(1);
-        }
+        
     }
 
 
