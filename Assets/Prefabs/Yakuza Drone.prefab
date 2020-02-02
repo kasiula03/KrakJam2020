@@ -322,10 +322,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _flyHeight: {x: 0, y: 3, z: 0}
-  _targetRange: 15
+  _targetRange: 10
   _bulletPrefab: {fileID: 8722675013218940676, guid: 480ac5300a8c05044babfabfaf72a2f5,
     type: 3}
-  _shootCooldown: 5
+  _shootCooldown: 10
   _movementAnimation: {fileID: 5208701096022919839}
 --- !u!61 &5208701096022919827
 BoxCollider2D:

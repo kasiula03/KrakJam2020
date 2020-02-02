@@ -230,7 +230,7 @@ MonoBehaviour:
   PlayerHealth: {fileID: 6581554354297476966}
   JetpackFuel: {fileID: 2988169203560025333}
   DeathWindow: {fileID: 2112643177207600773}
-  LaserPrefab: {fileID: 8459422568809839848, guid: 4fe56a6d7c1693f43b66bde3d5ecd3d2,
+  LaserPrefab: {fileID: 2551751024353984987, guid: 77cd95f7316a30e47971e3c619f97dac,
     type: 3}
   BulletPrefab: {fileID: 2168595441457339279, guid: de84993bde01e7f49a2706a95739e343,
     type: 3}
@@ -243,6 +243,7 @@ MonoBehaviour:
   jetpackKeyCode: v
   specialActionKeyCode: z
   laserKeyCode: e
+  keyforRGB: y
   currentKeyPressed: 
   _selectRGBCanvas: {fileID: 542725898602040419}
 --- !u!114 &6581554354297476966
@@ -267,6 +268,7 @@ MonoBehaviour:
     type: 3}
   EmptyHealthIcon: {fileID: 7875337772317841176, guid: 9cd8cd94c9380aa489edd6e50922dad3,
     type: 3}
+  Damage: {fileID: -7027257175790173229, guid: 8465d2899c68ba145bd6d81bc8f0092c, type: 3}
 --- !u!114 &2988169203560025333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -468,6 +470,8 @@ MonoBehaviour:
   forDance:
   - {fileID: 21300000, guid: b852ac449a51541d391887e44b3917e0, type: 3}
   - {fileID: 21300000, guid: 013953d2ace764baba1522e009f81fee, type: 3}
+  _shootWait: 0
+  _shootWaitSet: 0.6
 --- !u!1001 &542725897599752693
 PrefabInstance:
   m_ObjectHideFlags: 0
