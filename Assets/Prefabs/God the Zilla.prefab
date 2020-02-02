@@ -149,8 +149,8 @@ MonoBehaviour:
   _isOneTimeAction: 1
   _dialogTextBoxPrefab: {fileID: 6771305292704220385, guid: 86c4b946082762646bdf24bbbcef8a5a,
     type: 3}
-  _text: Elo loe
-  _speakerName: dd
+  _text: HOW DARE YOU?
+  _speakerName: Zilla the God
   _offset: {x: -5, y: 2, z: 0}
   _hideTime: 0
 --- !u!114 &2069478985210130331
@@ -168,8 +168,8 @@ MonoBehaviour:
   _isOneTimeAction: 1
   _dialogTextBoxPrefab: {fileID: 6771305292704220385, guid: 86c4b946082762646bdf24bbbcef8a5a,
     type: 3}
-  _text: Looser
-  _speakerName: dd
+  _text: Don't hide behind boxes!
+  _speakerName: Zilla the God
   _offset: {x: -6, y: 2, z: 0}
   _hideTime: 0
 --- !u!114 &2069478985210130328
@@ -186,8 +186,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnDieObject: {fileID: 0}
   _damageAnimation: {fileID: 7795140823863776672}
-  MaxHealthy: 3
-  CurrentHealthy: 3
+  MaxHealthy: 50
+  CurrentHealthy: 50
   MarginBetweenIcons: 0.1
   IconsPosition: {fileID: 0}
   FullHealthIcon: {fileID: 0}
