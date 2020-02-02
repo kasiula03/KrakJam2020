@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private DieAnimation OnDieObject;
+    [SerializeField] private DamageAnimation _damageAnimation;
 
     public int MaxHealthy = 3;
     public int CurrentHealthy;
@@ -28,6 +29,10 @@ public class PlayerHealth : MonoBehaviour
     {
         CurrentHealthy -= damage;
         CurrentHealthy = Mathf.Max(0, CurrentHealthy);
+        if (_damageAnimation != null)
+        {
+            _damageAnimation.Damage();
+        }
 
         if (CurrentHealthy <= 0 && gameObject.tag != "Player")
         {

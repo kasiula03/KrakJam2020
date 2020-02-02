@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 3797645588627704641}
   - component: {fileID: 293391774}
   - component: {fileID: 5326134542180608877}
+  - component: {fileID: 9198046371190869863}
   m_Layer: 0
   m_Name: Millenial
   m_TagString: Enemy
@@ -236,9 +237,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnDieObject: {fileID: 0}
+  _damageAnimation: {fileID: 9198046371190869863}
   MaxHealthy: 1
   CurrentHealthy: 1
   MarginBetweenIcons: 0.1
   IconsPosition: {fileID: 0}
   FullHealthIcon: {fileID: 0}
   EmptyHealthIcon: {fileID: 0}
+--- !u!114 &9198046371190869863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 15761000006201845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 836eba281b263be4dac9e27003093437, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spriteRenderer: {fileID: 15761000006201847}
+  _damageColor: {r: 1, g: 0.6462264, b: 0.6462264, a: 1}
