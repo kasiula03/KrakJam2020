@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Zenject;
 
 public class PlayerController : MonoBehaviour
@@ -40,7 +41,6 @@ public class PlayerController : MonoBehaviour
     public string specialActionKeyCode = "z";
     public string laserKeyCode = "e";
     public string keyforRGB = "y";
-
 
     //private variables
     public delegate void PlayerEvent();
@@ -140,12 +140,22 @@ public class PlayerController : MonoBehaviour
         left = Input.GetKey(moveLeftKeyCode);
         right = Input.GetKey(moveRightKeyCode);
     }
+
+    void CheckReset()
+    {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+    }
     
     void Update()
     {
         _isGrounded = CalculateIsGrounded();
         CollectInput();
-        
+        CheckReset();
+
+
         _anim.SetAnimationState(CalculateState());
         
         if (!isDeadState)
@@ -459,5 +469,4 @@ public class PlayerController : MonoBehaviour
 
         return false;
     }
-    
 }
