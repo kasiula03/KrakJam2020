@@ -15,6 +15,7 @@ public class PlayerHealth : MonoBehaviour
     public Transform IconsPosition;
     public GameObject FullHealthIcon;
     public GameObject EmptyHealthIcon;
+    public Damage Damage;
 
 
     private List<GameObject> _currentIcons= new List<GameObject>();
@@ -27,6 +28,13 @@ public class PlayerHealth : MonoBehaviour
 
     public void SubHealth (int damage)
     {
+        if(Damage != null)
+        {
+            var damageObj = Instantiate(Damage);
+            damageObj.transform.parent = gameObject.transform;
+            damageObj.transform.position = new Vector2(transform.position.x, transform.position.y);
+        }
+
         CurrentHealthy -= damage;
         CurrentHealthy = Mathf.Max(0, CurrentHealthy);
         if (_damageAnimation != null)
