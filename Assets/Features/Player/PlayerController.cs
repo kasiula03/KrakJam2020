@@ -275,6 +275,7 @@ public class PlayerController : MonoBehaviour
             if (_direction == -1)
                 newBox.transform.Rotate(0, 0, 180);
             lastFireTime = Time.time;
+            _anim.SetAnimationState(FakeAnimationThatIWillUseInsteadOfUsingBuiltinUnityAnimator.States.SHOOT);
         }
     }
 

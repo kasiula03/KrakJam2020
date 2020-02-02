@@ -182,6 +182,7 @@ GameObject:
   - component: {fileID: -6013780804537658156}
   - component: {fileID: 1391629775}
   - component: {fileID: 8227650870193688156}
+  - component: {fileID: -7205680032172718686}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -315,7 +316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59119c28fff5a2a4db0fb1e592aa376a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _checkOnGround: {fileID: 1825707557}
+  _checkOnGround: []
   _layerMask:
     serializedVersion: 2
     m_Bits: 23
@@ -328,6 +329,7 @@ MonoBehaviour:
   reloadGunTime: 0.5
   PlayerHealth: {fileID: 1391629775}
   JetpackFuel: {fileID: 8227650870193688156}
+  DeathWindow: {fileID: -7205680032172718686}
   BulletPrefab: {fileID: 2168595441457339279, guid: de84993bde01e7f49a2706a95739e343,
     type: 3}
   JetPackParticlePrefab: {fileID: 7019095592853729841, guid: 7736b978e70083f409c2c00ed20065a1,
@@ -377,3 +379,15 @@ MonoBehaviour:
   fuelFireSpeed: 50
   fuelGenerationSpeed: 30
   fuelStatusUI: {fileID: 0}
+--- !u!114 &-7205680032172718686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6119828431039171692}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4593ccffbb6706847a90f0160c5ca142, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
