@@ -1,5 +1,65 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1956521679
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1956521680}
+  m_Layer: 8
+  m_Name: checkOnGround (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1956521680
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1956521679}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.18, y: -3.14, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4339457241386731048}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2138207672
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2138207673}
+  m_Layer: 8
+  m_Name: checkOnGround (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2138207673
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2138207672}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.1, y: -3.14, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4339457241386731048}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4339457241386731044
 GameObject:
   m_ObjectHideFlags: 0
@@ -16,6 +76,8 @@ GameObject:
   - component: {fileID: 7553986652331696007}
   - component: {fileID: 1995051078}
   - component: {fileID: 4804087627825676201}
+  - component: {fileID: 3288391175446591423}
+  - component: {fileID: 1995051079}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -37,6 +99,8 @@ Transform:
   - {fileID: 7553986651964660845}
   - {fileID: 7553986652642994977}
   - {fileID: 7553986650784321431}
+  - {fileID: 2138207673}
+  - {fileID: 1956521680}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -149,7 +213,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59119c28fff5a2a4db0fb1e592aa376a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _checkOnGround: {fileID: 7553986651964660845}
+  _checkOnGround:
+  - {fileID: 7553986651964660845}
+  - {fileID: 2138207673}
+  - {fileID: 1956521680}
   _layerMask:
     serializedVersion: 2
     m_Bits: 23
@@ -161,8 +228,8 @@ MonoBehaviour:
   jumpForce: 3
   reloadGunTime: 0.5
   PlayerHealth: {fileID: 7553986652331696007}
-  JetpackFuel: {fileID: 1995051078}
-  DeathWindow: {fileID: 4804087627825676201}
+  JetpackFuel: {fileID: 3288391175446591423}
+  DeathWindow: {fileID: 1995051079}
   BulletPrefab: {fileID: 2168595441457339279, guid: de84993bde01e7f49a2706a95739e343,
     type: 3}
   JetPackParticlePrefab: {fileID: 7019095592853729841, guid: 7736b978e70083f409c2c00ed20065a1,
@@ -213,6 +280,36 @@ MonoBehaviour:
   fuelGenerationSpeed: 30
   fuelStatusUI: {fileID: 0}
 --- !u!114 &4804087627825676201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4339457241386731044}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4593ccffbb6706847a90f0160c5ca142, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3288391175446591423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4339457241386731044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3e3a6be50ba4424c962d734b8d3a1c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jetpackForce: 15
+  maxFuel: 100
+  fuel: 100
+  fuelFireSpeed: 50
+  fuelGenerationSpeed: 30
+  fuelStatusUI: {fileID: 0}
+--- !u!114 &1995051079
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

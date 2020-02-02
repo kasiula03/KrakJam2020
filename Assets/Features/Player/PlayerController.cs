@@ -6,7 +6,7 @@ using Zenject;
 public class PlayerController : MonoBehaviour
 {
     [Inject] private readonly PlayerAbilitiesLogic _playerAbilitiesLogic;
-    [SerializeField] private Transform _checkOnGround;
+    [SerializeField] private Transform[] _checkOnGround;
     [SerializeField] private LayerMask _layerMask;
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private FakeAnimationThatIWillUseInsteadOfUsingBuiltinUnityAnimator _anim;
@@ -395,7 +395,8 @@ public class PlayerController : MonoBehaviour
 
     private bool CalculateIsGrounded()
     {
-        if(Physics2D.Linecast(this.transform.position, _checkOnGround.position, _layerMask))
+        for(int i = 0; i < _checkOnGround.Length; i++)
+        if(Physics2D.Linecast(this.transform.position, _checkOnGround[i].position, _layerMask))
         {
             return true;
         }
