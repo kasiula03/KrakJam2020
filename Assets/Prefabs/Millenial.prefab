@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingOrder: 11
   m_Sprite: {fileID: 21300000, guid: a49f316d5c8c14ceb99445b3c69b115e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.64, y: 0.64}
@@ -124,7 +124,7 @@ MonoBehaviour:
   _actionOnPlayer: {fileID: 15761000006201843}
   _movementAnimation: {fileID: 0}
   _property: {fileID: 1792461561}
-  _range: 4
+  _range: 10
   _targetTag: Player
   _speed: 2
   _idleMovement: 1
