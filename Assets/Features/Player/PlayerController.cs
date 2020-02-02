@@ -174,10 +174,7 @@ public class PlayerController : MonoBehaviour
             SubHealth(1);
             Destroy(col.gameObject);
         }
-        else if (col.gameObject.tag == "Enemy")
-        {
-            SubHealth(1);
-        }
+        
     }
 
 
@@ -364,6 +361,11 @@ public class PlayerController : MonoBehaviour
         _direction = 1;
         _spriteRenderer.flipX = false;
         VerticalMovement(Vector2.right);
+    }
+
+    public void Dance()
+    {
+        _anim.SetAnimationState(FakeAnimationThatIWillUseInsteadOfUsingBuiltinUnityAnimator.States.DANCE);
     }
     
     private void VerticalMovement(Vector2 direction)
