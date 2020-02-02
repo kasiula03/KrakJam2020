@@ -2131,6 +2131,11 @@ PrefabInstance:
       propertyPath: DeathWindow
       value: 
       objectReference: {fileID: 339352296}
+    - target: {fileID: 918390241, guid: 5a1ca901973c8dd409c78f27cbe02d1d, type: 3}
+      propertyPath: forShoot
+      value: 
+      objectReference: {fileID: 21300000, guid: 7726f05215b394024ad3400c673a09e3,
+        type: 3}
     - target: {fileID: 6119828431039171680, guid: 5a1ca901973c8dd409c78f27cbe02d1d,
         type: 3}
       propertyPath: m_LocalPosition.x
