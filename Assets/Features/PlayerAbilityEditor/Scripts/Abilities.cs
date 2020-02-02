@@ -36,7 +36,7 @@ public class Abilities
             { BindableReaction.Fire, ExecuteFire },
             { BindableReaction.Jetpack, ExecuteJetpack },
             { BindableReaction.Lock, ExecuteLock },
-            { BindableReaction.Null, _ => { }},
+            { BindableReaction.Null, ExecuteDance },
             { BindableReaction.Vomit, _ => { }},
             { BindableReaction.MoveLeft, ExecuteMoveLeft},
             { BindableReaction.MoveRight, ExecuteMoveRight},
@@ -45,6 +45,11 @@ public class Abilities
     public static void ExecuteLock(PlayerController player)
     {
         player.PerformSpecialAction();
+    }
+
+    public static void ExecuteDance(PlayerController player)
+    {
+        player.Dance();
     }
 
     public static void ExecuteFire(PlayerController player)
