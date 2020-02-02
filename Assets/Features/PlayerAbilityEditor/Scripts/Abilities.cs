@@ -13,7 +13,7 @@ public class Abilities
         LaserButtonPressed,
         LeftMovement,
         RightMovement,
-
+        ShowHideRGB
     }
     
     public enum BindableReaction

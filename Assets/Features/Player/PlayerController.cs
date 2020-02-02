@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
     public string jetpackKeyCode    =   "v";
     public string specialActionKeyCode = "z";
     public string laserKeyCode = "e";
+    public string keyforRGB = "y";
 
 
     //private variables
@@ -204,6 +205,10 @@ public class PlayerController : MonoBehaviour
         _playerEvents.Add(new EventConfig(Abilities.BindableReason.LockWheelButtonPressed,
             TypeEvent.Down,
             specialActionKeyCode));
+        
+        _playerEvents.Add(new EventConfig(Abilities.BindableReason.ShowHideRGB,
+            TypeEvent.Down,
+            keyforRGB));
 
         //_playerEvents.Add(new EventConfig(Fly, TypeEvent.Key, jetpackKeyCode));
         //_playerEvents.Add(new EventConfig(StopFly, TypeEvent.Up, jetpackKeyCode));
