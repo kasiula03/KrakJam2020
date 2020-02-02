@@ -257,6 +257,8 @@ GameObject:
   - component: {fileID: 5208701096022919827}
   - component: {fileID: 5208701096022919839}
   - component: {fileID: 4512069512906154258}
+  - component: {fileID: 8466948016264390972}
+  - component: {fileID: 4513453520819249354}
   m_Layer: 0
   m_Name: Yakuza Drone
   m_TagString: Enemy
@@ -384,6 +386,38 @@ MonoBehaviour:
   IconsPosition: {fileID: 0}
   FullHealthIcon: {fileID: 0}
   EmptyHealthIcon: {fileID: 0}
+--- !u!114 &8466948016264390972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5208701096022919836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d8e0a9b632fc9b47876bad2465a32ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetInRange: 0
+  blocked: 0
+  facingRight: 0
+  blind: 0
+--- !u!114 &4513453520819249354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5208701096022919836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c66d6aa0a557ecf4ba4815b19a42dc7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isBlocked: 0
+  targetInRange: 0
+  facingRight: 0
+  blinded: 0
 --- !u!1 &5208701096167393857
 GameObject:
   m_ObjectHideFlags: 0
